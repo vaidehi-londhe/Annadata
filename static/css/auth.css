@@ -25,6 +25,15 @@ body{
     overflow-x:hidden;
 }
 
+.signup-container,
+.form-container,
+form,
+.input-box,
+.checkbox{
+    max-width:100%;
+    min-width:0;
+}
+
 /* Main Container */
 
 .signup-container{
@@ -370,9 +379,13 @@ border-radius:20px;
 }
 
 .input-box input{
-
-font-size:17px;
-
+    flex:1;
+    min-width:0;
+    border:none;
+    outline:none;
+    background:transparent;
+    font-size:20px;
+    color:#184914;
 }
 
 .signup-btn{

@@ -18,6 +18,7 @@ body:has(.sathi-shell) .phone-shell { width:100%; max-width:none; min-height:100
 /* Keep header and input fixed; only messages scroll */
 .sathi-shell {
     height: 100dvh;
+    height: 100svh;
     min-height: 0;
     overflow: hidden;
 }

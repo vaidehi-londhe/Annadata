@@ -26,6 +26,14 @@ body{
 
 }
 
+.login-container,
+.form-container,
+form,
+.input-box{
+    max-width:100%;
+    min-width:0;
+}
+
 .login-container{
     animation:fadeUp .7s ease;
 }
@@ -183,6 +191,7 @@ to{
 .input-box input{
 
     flex:1;
+    min-width:0;
 
     border:none;
     outline:none;
