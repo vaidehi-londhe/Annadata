@@ -279,11 +279,6 @@ def api_notification_schemes():
     } for s in latest])
     
     
-@app.route('/settings')
-@login_required
-def settings():
-    return render_template('settings.html')
-
 
 @app.route('/saved-schemes')
 @login_required
@@ -475,6 +470,32 @@ def login():
         return redirect(url_for('dashboard'))
 
     return render_template('login.html', error=None)
+
+
+@app.route('/forgot-password', methods=['GET', 'POST'])
+def forgot_password():
+    error = None
+    if request.method == 'POST':
+        phone = request.form.get('phone', '').strip()
+        password = request.form.get('password', '')
+        confirm = request.form.get('confirm_password', '')
+
+        db = get_db()
+        user = db.execute("SELECT * FROM users WHERE phone_number=?", (phone,)).fetchone()
+
+        if not user:
+            error = "No account found with this mobile number."
+        elif password != confirm:
+            error = "Passwords do not match."
+        elif len(password) < 6:
+            error = "Password must be at least 6 characters."
+        else:
+            password_hash = generate_password_hash(password)
+            db.execute("UPDATE users SET password_hash=? WHERE phone_number=?", (password_hash, phone))
+            db.commit()
+            return redirect(url_for('login'))
+
+    return render_template('forgot_password.html', error=error)
 
 
 @app.route('/logout')
