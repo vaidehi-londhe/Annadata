@@ -25,13 +25,6 @@
             <i class="fa-solid fa-arrow-left"></i>
         </a>
 
-        <button class="crop-detail-icon-btn notification-btn js-notif-bell"
-                type="button">
-            <i class="fa-solid fa-bell"></i>
-            <span class="notification-dot"></span>
-        </button>
-    </header>
-
     <section class="crop-detail-heading">
         <span>{{ crop.season }} crop</span>
         <h1>{{ crop.name }}</h1>
@@ -39,8 +32,7 @@
     </section>
 
     <section class="crop-hero-image">
-        <img src="{{ url_for('static', filename='images/crops/' + image_filename) }}"
-             alt="{{ crop.name }} crop">
+        <img src="{{ url_for('static', filename='images/crops/' + crop.name|lower + '.jpg') }}" alt="{{ crop.name }} crop">
     </section>
 
     <section class="crop-detail-section">
