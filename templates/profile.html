@@ -27,6 +27,72 @@
 
 <script src="{{ url_for('static', filename='js/notifications.js') }}"></script>
 <script src="{{ url_for('static', filename='js/side-menu.js') }}"></script>
+
+<div id="settings-overlay" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,.45); z-index:9999; align-items:center; justify-content:center; padding:16px;">
+    <div style="background:#fff; width:100%; max-width:380px; border-radius:20px; overflow:hidden; font-family:'Poppins',sans-serif;">
+
+        <div style="display:flex; align-items:center; justify-content:space-between; padding:18px 20px; background:#2f6d1f; color:#fff;">
+            <h3 style="margin:0; font-size:16px;">Settings</h3>
+            <button id="settings-close-btn" style="background:rgba(255,255,255,.2); border:0; color:#fff; width:28px; height:28px; border-radius:50%; cursor:pointer;">✕</button>
+        </div>
+
+        <div style="padding:8px 16px;">
+            <div class="account-row">
+                <div class="account-icon"><i class="fa-solid fa-bell"></i></div>
+                <span>Scheme update notifications</span>
+                <label class="settings-switch">
+                    <input type="checkbox" id="notif-toggle">
+                    <span class="settings-slider"></span>
+                </label>
+            </div>
+
+            <div class="account-row">
+                <div class="account-icon"><i class="fa-solid fa-language"></i></div>
+                <span>App Language</span>
+                <select id="lang-select" style="border:none; background:transparent; font-size:15px; color:#2f6b1f; font-weight:600;">
+                    <option value="en">English</option>
+                    <option value="hi">हिंदी</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.settings-switch { position:relative; display:inline-block; width:44px; height:24px; }
+.settings-switch input { opacity:0; width:0; height:0; }
+.settings-slider { position:absolute; cursor:pointer; inset:0; background:#ccc; border-radius:24px; transition:.2s; }
+.settings-slider:before { content:""; position:absolute; height:18px; width:18px; left:3px; bottom:3px; background:#fff; border-radius:50%; transition:.2s; }
+.settings-switch input:checked + .settings-slider { background:#2f6b1f; }
+.settings-switch input:checked + .settings-slider:before { transform:translateX(20px); }
+</style>
+
+<script>
+const settingsOverlay = document.getElementById('settings-overlay');
+const notifToggle = document.getElementById('notif-toggle');
+const langSelect = document.getElementById('lang-select');
+
+notifToggle.checked = localStorage.getItem('notif_pref') !== 'off';
+langSelect.value = localStorage.getItem('app_lang') || 'en';
+
+document.getElementById('settings-open-btn').addEventListener('click', function () {
+    settingsOverlay.style.display = 'flex';
+});
+document.getElementById('settings-close-btn').addEventListener('click', function () {
+    settingsOverlay.style.display = 'none';
+});
+settingsOverlay.addEventListener('click', function (e) {
+    if (e.target === settingsOverlay) settingsOverlay.style.display = 'none';
+});
+
+notifToggle.addEventListener('change', function () {
+    localStorage.setItem('notif_pref', this.checked ? 'on' : 'off');
+});
+langSelect.addEventListener('change', function () {
+    localStorage.setItem('app_lang', this.value);
+});
+</script>
+
 <body>
 
 <div class="phone-container profile-page">
@@ -334,18 +400,18 @@
 
         <!-- SETTINGS -->
 
-        <a href="{{ url_for('settings') }}"
-        class="account-row">
+        <button type="button" id="settings-open-btn"
+        class="account-row" style="width:100%; border:none; background:none; text-align:left; cursor:pointer;">
 
-            <div class="account-icon">
-                <i class="fa-solid fa-gear"></i>
-            </div>
+    <div class="account-icon">
+        <i class="fa-solid fa-gear"></i>
+    </div>
 
-            <span>Settings</span>
+    <span>Settings</span>
 
-            <i class="fa-solid fa-arrow-right"></i>
+    <i class="fa-solid fa-arrow-right"></i>
 
-        </a>
+</button>
 
     </div>
 </div>
