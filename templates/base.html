@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+  <!-- PWA / Browser meta -->
+  <meta name="theme-color" content="#3f7f2c">
+  <meta name="description" content="Personalised crop advisory, government scheme recommendations, and farmer wellbeing support for Indian farmers.">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Annadata">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Annadata – Smart Farming Companion">
+  <meta property="og:description" content="Crop advisory, government schemes & farmer wellbeing support.">
+  <meta property="og:image" content="/static/images/icon-512.png">
+  <meta property="og:type" content="website">
+
+  <title>{% block title %}Annadata{% endblock %}</title>
+
+  <!-- Icons & Manifest -->
+  <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+  <link rel="icon" href="{{ url_for('static', filename='images/icon-192.png') }}" sizes="192x192">
+  <link rel="apple-touch-icon" href="{{ url_for('static', filename='images/icon-192.png') }}">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400;1,600&display=swap" rel="stylesheet">
+
+  <!-- Icon library -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <!-- App styles -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/splash.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/schemes.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/crop.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/sathi.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/profile_setup.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/notifications.css') }}">
+  <!-- PWA styles (install banner, toast, offline, app-mode safe-areas) -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/pwa.css') }}">
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════
+       PWA Install Banner
+       (shown automatically by pwa.js when
+        Chrome fires 'beforeinstallprompt')
+  ═══════════════════════════════════════ -->
+  <div id="pwa-install-banner" role="dialog" aria-label="Install Annadata app">
+    <div class="pwa-banner-left">
+      <img src="{{ url_for('static', filename='images/icon-192.png') }}"
+           alt="Annadata icon" class="pwa-banner-icon">
+      <div class="pwa-banner-text">
+        <p class="pwa-banner-title">Install Annadata</p>
+        <p class="pwa-banner-sub">Add to home screen for the full app experience</p>
+      </div>
+    </div>
+    <div class="pwa-banner-actions">
+      <button id="pwa-install-btn" class="pwa-install-btn" aria-label="Install">Install</button>
+      <button id="pwa-dismiss-btn" class="pwa-dismiss-btn" aria-label="Dismiss">✕</button>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       Update Available Banner
+       (shown by pwa.js when SW finds update)
+  ═══════════════════════════════════════ -->
+  <div id="update-banner" role="alert">
+    🔄 A new version of Annadata is ready.
+    <button onclick="window.applyUpdate()">Update now</button>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       Toast Container  (managed by pwa.js)
+  ═══════════════════════════════════════ -->
+  <div id="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- ═══════════════════════════════════════
+       Main App Shell
+  ═══════════════════════════════════════ -->
+  <div class="phone-shell">
+    {% block content %}{% endblock %}
+
+    {% block bottom_nav %}
+    {% if show_nav|default(true) %}
+    <nav class="bottom-nav" aria-label="Main navigation">
+      <a href="{{ url_for('dashboard') }}"
+         class="nav-item {% if active_nav == 'home' %}active{% endif %}"
+         aria-label="Home">
+        <span class="nav-icon">🏠</span><span>Home</span>
+      </a>
+      <a href="{{ url_for('profile') }}"
+         class="nav-item {% if active_nav == 'profile' %}active{% endif %}"
+         aria-label="Profile">
+        <span class="nav-icon">👤</span><span>Profile</span>
+      </a>
+      <a href="{{ url_for('sathi') }}"
+         class="nav-item {% if active_nav == 'sathi' %}active{% endif %}"
+         aria-label="Sathi">
+        <span class="nav-icon">💬</span><span>Sathi</span>
+      </a>
+    </nav>
+    {% endif %}
+    {% endblock %}
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       PWA Script — must be LAST
+       Registers SW, detects mode, wires up
+       install prompt & toast system
+  ═══════════════════════════════════════ -->
+  <script src="{{ url_for('static', filename='js/pwa.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/notifications.js') }}"></script>
+
+  {% block extra_js %}{% endblock %}
+</body>
+</html>

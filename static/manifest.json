@@ -1,0 +1,53 @@
+{
+  "name": "Annadata - Smart Farming Companion",
+  "short_name": "Annadata",
+  "description": "Personalised crop advisory, government scheme recommendations, and farmer wellbeing support for Indian farmers.",
+  "start_url": "/",
+  "id": "/",
+  "scope": "/",
+  "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone", "browser"],
+  "orientation": "any",
+  "background_color": "#f4ffa2",
+  "theme_color": "#3f7f2c",
+  "categories": ["productivity", "lifestyle"],
+  "lang": "en-IN",
+  "dir": "ltr",
+  "icons": [
+    {
+      "src": "/static/images/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/static/images/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Crop Advisory",
+      "short_name": "Crops",
+      "description": "Get personalised crop recommendations for your land",
+      "url": "/crop-advisory",
+      "icons": [{ "src": "/static/images/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Government Schemes",
+      "short_name": "Schemes",
+      "description": "View eligible government schemes and subsidies",
+      "url": "/schemes",
+      "icons": [{ "src": "/static/images/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Talk to Sathi",
+      "short_name": "Sathi",
+      "description": "Chat with your AI farmer companion",
+      "url": "/sathi",
+      "icons": [{ "src": "/static/images/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}

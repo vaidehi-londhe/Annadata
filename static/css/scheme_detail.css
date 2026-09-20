@@ -1,0 +1,88 @@
+body:has(.scheme-detail-page) { background:linear-gradient(180deg,#f7ffb6 0%,#f3ffa0 45%,#efff92 100%); }
+  body:has(.scheme-detail-page) .phone-shell { width:100%; max-width:none; min-height:100vh; background:transparent; }
+  .scheme-detail-page { width:100%; max-width:770px; margin:0 auto; padding:32px 24px 130px; color:#123d19; }
+  .scheme-detail-page * { box-sizing:border-box; }
+  .detail-header { margin-bottom:24px; }.back-link { display:inline-flex; align-items:center; gap:10px; color:#123d19; font-size:28px; font-weight:800; text-decoration:none; }.back-link span { font-size:27px; }.detail-subtitle { margin:7px 0 0 38px; color:#577052; font-size:16px; }
+  .scheme-hero { display:flex; align-items:center; gap:27px; margin-bottom:26px; padding:27px 30px; border-radius:27px; background:#e4f6da; box-shadow:0 12px 28px rgba(58,91,22,.11); }.scheme-hero-icon { width:94px; height:94px; display:grid; place-items:center; flex-shrink:0; border-radius:22px; background:#f2ffce; color:#1f6b25; font-size:40px; }.scheme-hero-copy { flex:1; }.category-label,.detail-card h3 { margin:0; color:#3e7f28; font-size:13px; font-weight:800; letter-spacing:.3px; }.scheme-hero h1 { margin:7px 0 9px; color:#123d19; font-size:32px; line-height:1.1; }.scheme-hero p { margin:0; color:#577052; font-size:16px; }.eligible-tag { align-self:flex-start; padding:9px 17px; border-radius:18px; background:#eff8bd; color:#214b18; font-size:14px; font-weight:800; }
+  .summary-grid,.info-grid { display:grid; gap:28px; margin-bottom:28px; }.summary-grid { grid-template-columns:1.7fr 1fr;align-items: start; }.info-grid { grid-template-columns:1fr 1fr; }.detail-card { min-height:164px; padding:26px 28px; border-radius:25px; background:#fff; box-shadow:0 10px 24px rgba(58,91,22,.10); }.detail-card h3 { margin-bottom:17px; }.detail-card p { margin:0; color:#294d2c; font-size:16px; line-height:1.62; }.benefit-amount { margin:28px 0 5px; color:#123d19; font-size:34px; font-weight:800; }.muted { color:#577052; font-size:15px; }
+  .summary-grid {
+    grid-template-columns: 1.7fr 1fr;
+    align-items: start;
+}
+
+.summary-left {
+    display: grid;
+    gap: 18px;
+}
+
+.apply-steps-card {
+    min-height: auto;
+} 
+
+.summary-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 18px;
+    align-items: stretch;
+}
+
+.detail-left {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.benefit-card {
+    min-height: 100%;
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.benefit-card h3,
+.benefit-card .benefit-amount,
+.benefit-card .muted {
+    margin: 0;
+}
+
+.benefit-card .benefit-amount {
+    font-size: clamp(32px, 4vw, 48px);
+    font-weight: 700;
+    line-height: 1.1;
+    color: #123d20;
+}
+@media (max-width: 650px) {
+    .summary-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.summary-grid > .detail-card:last-child {
+    min-height: 230px; /* box taller */
+    padding: 30px;
+}
+
+.benefit-amount {
+    font-size: 40px; /* ₹6,000/year bigger */
+}
+  .detail-list { margin:0; padding-left:18px; color:#123d19; font-size:16px; line-height:1.95; }.documents-card { min-height:auto; margin-bottom:24px; }.documents-card .detail-list { display:flex; flex-wrap:wrap; gap:5px 25px; padding-left:18px; }.documents-card li { margin-right:8px; }
+  .apply-row { display:flex; gap:12px; }.apply-btn { flex:1; display:flex; align-items:center; justify-content:center; gap:10px; padding:19px; border-radius:20px; background:linear-gradient(135deg,#397b24,#559b39); color:#fff; font-size:18px; font-weight:700; text-decoration:none; box-shadow:0 12px 25px rgba(63,127,44,.25); transition:.25s; }.apply-btn:hover { transform:translateY(-3px); }.save-btn { width:64px; border:0; border-radius:20px; background:#e4f6da; color:#2f7a24; font-size:27px; cursor:pointer; }
+  .scheme-detail-nav { position:fixed; left:50%; bottom:0; z-index:999; width:min(750px,100%); display:flex; justify-content:space-around; padding:12px 18px 11px; transform:translateX(-50%); border:1px solid #edf0e8; border-radius:25px 25px 0 0; background:rgba(255,255,255,.96); box-shadow:0 -8px 24px rgba(32,68,25,.10); }.scheme-detail-nav a { min-width:70px; display:flex; flex-direction:column; align-items:center; gap:5px; color:#8a8a8a; font-size:12px; font-weight:500; text-decoration:none; }.scheme-detail-nav a i { font-size:21px; }.scheme-detail-nav a.active { color:#237126; font-weight:700; }.scheme-detail-nav a.active i { padding:9px 13px; border-radius:14px; background:#edfacf; }
+  @media (max-width:620px) { .scheme-detail-page { padding:22px 16px 115px; }.detail-header { margin-bottom:20px; }.back-link { font-size:24px; }.detail-subtitle { margin-left:34px; font-size:14px; }.scheme-hero { gap:15px; padding:21px; }.scheme-hero-icon { width:64px; height:64px; font-size:30px; }.scheme-hero h1 { font-size:25px; }.scheme-hero p { font-size:13px; }.eligible-tag { display:none; }.summary-grid,.info-grid { grid-template-columns:1fr; gap:18px; margin-bottom:18px; }.detail-card { min-height:auto; padding:22px; }.detail-card p,.detail-list { font-size:14px; }.benefit-amount { margin-top:20px; }.apply-row { margin-top:4px; }.scheme-detail-nav { width:100%; padding:10px 4px; }.scheme-detail-nav a { min-width:auto; font-size:10px; }.scheme-detail-nav a i { font-size:18px; } }
+  body:has(.scheme-detail-page) {
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+}
+
+body:has(.scheme-detail-page) .phone-shell {
+    height: auto !important;
+    min-height: 100vh !important;
+    overflow: visible !important;
+}
+
+.scheme-detail-page {
+    height: auto !important;
+    min-height: 100vh !important;
+    overflow: visible !important;
+}

@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Annadata{% endblock %}
+{% set show_nav = false %}
+{% block content %}
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Poppins:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet">
+<div class="phone-container">
+<div class="splash-hero">
+    <div class="info-icon" onclick="document.getElementById('about-overlay').style.display='flex'">
+        <span>ⓘ</span><br><span style="font-size:0.6rem;">more info</span>
+    </div>
+
+    <div class="splash-middle">
+        <div class="splash-title">
+            <h1>ANNADATA</h1>
+            <p class="hi">अन्नदाता</p>
+            <p class="tagline">Guiding Every Harvest, Supporting Every Farmer</p>
+            <p class="features">Schemes • Crop Advice • Sathi Support</p>
+        </div>
+    </div>
+    <div class="splash-bottom">
+        <div class="lang-toggle">
+            <span>EN</span> <span>हिं</span> <span>मराठी</span>
+        </div>
+        <a href="{{ url_for('login') }}" class="btn-primary" style="margin-bottom:10px;">LOGIN</a>
+        <div style="text-align:center;">
+            <a href="{{ url_for('signup') }}" style="color:#d8e8c8; font-size:0.85rem;">New Farmer? Create Account</a>
+        </div>
+    </div>
+</div>
+
+<div id="about-overlay" class="overlay-backdrop" onclick="if(event.target===this) this.style.display='none'">
+    <div class="about-card">
+        <div class="about-close" onclick="document.getElementById('about-overlay').style.display='none'">✕</div>
+        <h3 style="color:#3a3a1a; margin-bottom:0.75rem;">About Annadata</h3>
+        <p style="color:#4a4a2a; font-size:0.85rem; line-height:1.6;">
+            Annadata is your one-stop farming companion. Get personalized government scheme
+            recommendations based on your income and land size, receive crop advice suited to
+            your soil and season if you're just starting out, and talk to Sathi — our support
+            companion — anytime you need someone to listen.
+        </p>
+    </div>
+</div>
+{% endblock %}

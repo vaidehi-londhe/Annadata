@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>No Connection — Annadata</title>
+  <link rel="manifest" href="/static/manifest.json">
+  <meta name="theme-color" content="#3f7f2c">
+  <link rel="icon" href="/static/images/icon-192.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+      background: linear-gradient(180deg, #f7ffb6 0%, #f4ffa2 45%, #efff95 100%);
+      color: #214b18;
+    }
+
+    .offline-icon {
+      font-size: 5rem;
+      margin-bottom: 1.5rem;
+      animation: bounce 2s ease-in-out infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+
+    .offline-logo {
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
+      margin: 0 auto 1.25rem;
+    }
+
+    h1 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #214b18;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      font-size: 0.9rem;
+      color: #4d6a3a;
+      max-width: 280px;
+      line-height: 1.7;
+      margin-bottom: 2rem;
+    }
+
+    .btn-retry {
+      background: #3f7f2c;
+      color: #fff;
+      border: none;
+      padding: 14px 32px;
+      border-radius: 28px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background 0.2s, transform 0.2s;
+      box-shadow: 0 8px 20px rgba(44, 93, 26, 0.25);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-retry:hover {
+      background: #2f6b1f;
+      transform: translateY(-2px);
+    }
+
+    .btn-retry:active { transform: scale(0.97); }
+
+    .tip {
+      margin-top: 2rem;
+      font-size: 0.78rem;
+      color: #6a8a50;
+    }
+  </style>
+</head>
+<body>
+  <img src="/static/images/icon-192.png" alt="Annadata" class="offline-logo">
+  <div class="offline-icon">🌾</div>
+  <h1>You're offline</h1>
+  <p>
+    It looks like you've lost your internet connection.
+    Please check your network and try again.
+  </p>
+  <button class="btn-retry" onclick="window.location.reload()">
+    <i class="fa-solid fa-rotate-right"></i>
+    Try Again
+  </button>
+  <p class="tip">Some pages may still be available from your last visit.</p>
+</body>
+</html>

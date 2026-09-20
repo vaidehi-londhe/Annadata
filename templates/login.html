@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Annadata | Login</title>
+
+    <link rel="stylesheet"
+        href="{{ url_for('static', filename='css/login.css') }}">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="login-container">
+
+    <!-- Header -->
+
+    <div class="header">
+
+        <div class="logo">
+
+            <i class="fa-solid fa-seedling"></i>
+
+            <h1>ANNADATA</h1>
+
+            <h2>अन्नदाता</h2>
+
+        </div>
+
+    </div>
+
+    <!-- Login Form -->
+
+    <div class="form-container">
+
+        <h1>Welcome Back!</h1>
+
+        <p class="subtitle">
+
+            Login to continue your farming journey
+            with Annadata
+
+        </p>
+
+        <form action="/login" method="POST">
+
+            <!-- Mobile -->
+
+            <div class="input-box">
+
+                <i class="fa-solid fa-phone"></i>
+
+                <input
+                    type="tel"
+                    name="phone"
+                    placeholder="Mobile Number"
+                    maxlength="10"
+                    required>
+
+            </div>
+
+            <!-- Password -->
+
+            <div class="input-box password-box">
+
+                <i class="fa-solid fa-lock"></i>
+
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Password"
+                    required>
+
+                <i class="fa-regular fa-eye-slash toggle-password"
+                    onclick="togglePassword()"></i>
+
+            </div>
+
+            <!-- Forgot Password -->
+
+            <div class="forgot">
+
+                <a href="/forgot-password">
+
+                    Forgot Password?
+
+                </a>
+
+            </div>
+
+            <!-- Login Button -->
+
+            <button
+                type="submit"
+                class="login-btn">
+
+                LOGIN
+
+            </button>
+
+            <!-- Divider -->
+
+            <div class="divider">
+
+                <span></span>
+
+                <p>OR</p>
+
+                <span></span>
+
+            </div>
+
+            <!-- Signup Card -->
+
+            <a href="/signup" class="signup-card">
+
+                <div class="card-icon">
+
+                    <i class="fa-solid fa-seedling"></i>
+
+                </div>
+
+                <div class="card-text">
+
+                    <h3>New to Annadata?</h3>
+
+                    <p>
+
+                        Create an account and start your
+                        smart farming journey.
+
+                    </p>
+
+                </div>
+
+                <div class="arrow">
+
+                    <i class="fa-solid fa-chevron-right"></i>
+
+                </div>
+
+            </a>
+
+        </form>
+
+    </div>
+
+</div>
+
+<script>
+
+function togglePassword(){
+
+const password=document.getElementById("password");
+
+const icon=document.querySelector(".toggle-password");
+
+if(password.type==="password"){
+
+password.type="text";
+
+icon.classList.remove("fa-eye-slash");
+
+icon.classList.add("fa-eye");
+
+}
+else{
+
+password.type="password";
+
+icon.classList.remove("fa-eye");
+
+icon.classList.add("fa-eye-slash");
+
+}
+
+}
+
+</script>
+
+</body>
+
+</html>

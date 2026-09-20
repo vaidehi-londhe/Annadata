@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>My Profile | Annadata</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/notifications.css') }}">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com"crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<script src="{{ url_for('static', filename='js/notifications.js') }}"></script>
+<body>
+
+<div class="phone-container profile-page">
+
+
+    <!-- TOP BAR -->
+
+    <header class="top-bar">
+
+        <button class="icon-btn">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <button class="icon-btn js-notif-bell" type="button">
+            <i class="fa-solid fa-bell"></i>
+        </button>
+
+    </header>
+
+
+    <!-- PROFILE HEADER -->
+
+    <section class="profile-header-card">
+
+        <div class="profile-avatar">
+            {{ (full_name or 'F')[0] | upper }}
+        </div>
+
+        <div class="profile-header-info">
+
+            <span class="profile-label">
+                My Profile
+            </span>
+
+            <h1>
+                {{ full_name or 'Farmer' }}
+            </h1>
+
+            <p>
+                <i class="fa-solid fa-location-dot"></i>
+
+                {{ profile.state if profile and profile.state
+                   else 'Location not added' }}
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- YOUR FARM -->
+
+    <section class="section-title">
+
+        <h2>Your Farm</h2>
+
+        <a href="{{ url_for('profile_setup') }}">
+            Edit Profile
+        </a>
+
+    </section>
+
+
+    <!-- FARM INFORMATION -->
+
+    <div class="profile-farm-grid">
+
+
+        <!-- PRIMARY CROP -->
+
+        <div class="profile-info-card">
+
+            <div class="profile-mini-icon green-icon">
+                <i class="fa-solid fa-seedling"></i>
+            </div>
+
+            <span>Primary Crop</span>
+
+            <strong>
+
+                {% if profile and profile.currently_growing %}
+
+                    {{ profile.currently_growing.split(',')[0] }}
+
+                {% else %}
+
+                    Not added
+
+                {% endif %}
+
+            </strong>
+
+        </div>
+
+
+        <!-- LAND -->
+
+        <div class="profile-info-card">
+
+            <div class="profile-mini-icon yellow-icon">
+                <i class="fa-solid fa-ruler-combined"></i>
+            </div>
+
+            <span>Land</span>
+
+            <strong>
+
+                {% if profile and profile.land_size %}
+
+                    {{ profile.land_size }}
+                    {{ profile.land_unit or 'Acres' }}
+
+                {% else %}
+
+                    Not added
+
+                {% endif %}
+
+            </strong>
+
+        </div>
+
+
+        <!-- EXPERIENCE -->
+
+        <div class="profile-info-card">
+
+            <div class="profile-mini-icon blue-icon">
+                <i class="fa-solid fa-chart-line"></i>
+            </div>
+
+            <span>Experience</span>
+
+            <strong>
+
+                {% if profile and profile.farming_experience %}
+
+                    {{ profile.farming_experience }}
+
+                {% else %}
+
+                    Not added
+
+                {% endif %}
+
+            </strong>
+
+        </div>
+
+
+        <!-- INCOME -->
+
+        <div class="profile-info-card">
+
+            <div class="profile-mini-icon purple-icon">
+                <i class="fa-solid fa-indian-rupee-sign"></i>
+            </div>
+
+            <span>Income</span>
+
+            <strong>
+
+                {% if profile and profile.income_range %}
+
+                    {{ profile.income_range }}
+
+                {% else %}
+
+                    Not added
+
+                {% endif %}
+
+            </strong>
+
+        </div>
+
+    </div>
+
+
+    <!-- FARM LOCATION -->
+
+    <section class="section-title profile-section-heading">
+
+        <h2>Farm Location</h2>
+
+    </section>
+
+
+    <div class="location-card">
+
+
+        <!-- STATE -->
+
+        <div class="location-row">
+
+            <div>
+
+                <span>State</span>
+
+                <strong>
+                    {{ profile.state if profile and profile.state
+                       else 'Not added' }}
+                </strong>
+
+            </div>
+
+            <i class="fa-solid fa-location-dot"></i>
+
+        </div>
+
+
+        <!-- DISTRICT -->
+
+        <div class="location-row">
+
+            <div>
+
+                <span>District</span>
+
+                <strong>
+                    {% if profile and 'district' in profile.keys()
+                          and profile['district'] %}
+                        {{ profile['district'] }}
+                    {% else %}
+                        Not added
+                    {% endif %}
+                </strong>
+
+            </div>
+
+            <i class="fa-solid fa-map"></i>
+
+        </div>
+
+
+        <!-- VILLAGE -->
+
+        <div class="location-row">
+
+            <div>
+
+                <span>Village</span>
+
+                <strong>
+                    {% if profile and 'village' in profile.keys()
+                          and profile['village'] %}
+                        {{ profile['village'] }}
+                    {% else %}
+                        Not added
+                    {% endif %}
+                </strong>
+
+            </div>
+
+            <i class="fa-solid fa-house"></i>
+
+        </div>
+
+    </div>
+
+
+    <!-- ACCOUNT -->
+
+    <section class="section-title profile-section-heading">
+
+        <h2>Account</h2>
+
+    </section>
+
+    <div class="account-card">
+        <div class="account-item"
+        onclick="window.location.href='{{ url_for('saved_schemes') }}'">
+
+
+        <!-- SAVED SCHEMES -->
+
+        <a href="#" class="account-row">
+
+            <div class="account-icon">  
+                <i class="fa-solid fa-file-lines"></i>
+            </div>
+
+            <span>Saved Schemes</span>
+
+            <i class="fa-solid fa-arrow-right"></i>
+
+        </a>
+
+
+        <!-- EDIT PROFILE -->
+
+        <a href="{{ url_for('profile_setup') }}"
+           class="account-row">
+
+            <div class="account-icon">
+                <i class="fa-solid fa-user-pen"></i>
+            </div>
+
+            <span>Edit Profile</span>
+
+            <i class="fa-solid fa-arrow-right"></i>
+
+        </a>
+
+
+        <!-- SETTINGS -->
+
+        <a href="#"
+           class="account-row">
+
+            <div class="account-icon">
+                <i class="fa-solid fa-gear"></i>
+            </div>
+
+            <span>Settings</span>
+
+            <i class="fa-solid fa-arrow-right"></i>
+
+        </a>
+
+    </div>
+</div>
+
+
+    <!-- LOG OUT -->
+
+    <a href="{{ url_for('logout') }}"
+       class="logout-btn">
+
+        Log Out
+
+    </a>
+
+
+    <!-- BOTTOM NAV -->
+
+    <nav class="bottom-nav">
+
+        <a href="{{ url_for('dashboard') }}">
+
+            <i class="fa-solid fa-house"></i>
+
+            <span>Home</span>
+
+        </a>
+
+
+        <a href="{{ url_for('crop_advisory') }}">
+
+            <i class="fa-solid fa-seedling"></i>
+
+            <span>Crop</span>
+
+        </a>
+
+
+        <a href="{{ url_for('schemes') }}">
+
+            <i class="fa-solid fa-file-lines"></i>
+
+            <span>Schemes</span>
+
+        </a>
+
+
+        <a href="{{ url_for('sathi') }}">
+
+            <i class="fa-solid fa-robot"></i>
+
+            <span>Sathi</span>
+
+        </a>
+
+
+        <a href="{{ url_for('profile') }}"
+           class="active">
+
+            <i class="fa-solid fa-user"></i>
+
+            <span>Profile</span>
+
+        </a>
+
+    </nav>
+
+
+</div>
+
+</body>
+
+</html>

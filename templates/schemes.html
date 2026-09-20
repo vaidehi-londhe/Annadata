@@ -1,0 +1,237 @@
+{% extends "base.html" %}
+
+{% block title %}Government Schemes - Annadata{% endblock %}
+
+{% set active_nav = 'schemes' %}
+
+{% block content %}
+
+<div class="schemes-page">
+
+    <!-- Top Header -->
+    <div class="top-actions">
+        <button class="menu-btn" type="button">
+            ☰
+        </button>
+
+        <button class="notification-btn js-notif-bell" type="button">
+            <i class="fa-solid fa-bell"></i>
+        </button>
+    </div>
+
+
+    <!-- Hero -->
+    <section class="schemes-hero">
+
+        <div class="hero-icon">
+            🌱
+        </div>
+
+        <div class="hero-text">
+            <h1>Government Schemes</h1>
+
+            <p>
+                Explore subsidies, loans and benefits
+                that support farmers like you.
+            </p>
+        </div>
+
+        <div class="hero-illustration">
+            🏛️
+        </div>
+
+    </section>
+
+
+    <!-- Search / Filter UI -->
+    <div class="scheme-tools">
+
+        <div class="search-box">
+            <span>⌕</span>
+            <input
+                type="text"
+                placeholder="Search schemes..."
+                id="schemeSearch"
+            >
+        </div>
+
+        <button class="filter-btn" type="button">
+            ⚱ <span>Filter</span>
+        </button>
+
+    </div>
+
+
+    <!-- Dynamic Schemes -->
+    <section class="schemes-list">
+
+        <h2>Schemes for You</h2>
+
+        {% for category, items in categories.items() %}
+
+            {% for s in items %}
+
+            <!-- Existing functionality preserved -->
+            <a
+                href="{{ url_for('scheme_detail', scheme_id=s.id) }}"
+                class="scheme-card"
+            >
+
+                <div class="scheme-card-left">
+
+                    <div class="scheme-icon">
+
+                        {% if category|lower == 'income support' %}
+                            🌱
+                        {% elif category|lower == 'insurance' %}
+                            🛡️
+                        {% elif category|lower == 'credit & loans' %}
+                            🐷
+                        {% elif category|lower == 'irrigation' %}
+                            💧
+                        {% else %}
+                            🌾
+                        {% endif %}
+
+                    </div>
+
+                    <div class="scheme-info">
+
+                        <h3>{{ s.name }}</h3>
+
+                        <p>
+                            {{ s.benefits.split('|')[0] }}
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="scheme-card-right">
+
+                    <span class="scheme-badge">
+                        Eligible
+                    </span>
+
+                    <span class="scheme-category">
+                        {{ category }}
+                    </span>
+
+                </div>
+
+
+                <div class="arrow-btn">
+                    →
+                </div>
+
+            </a>
+
+            {% endfor %}
+
+        {% endfor %}
+
+
+        <!-- Not Eligible -->
+        {% if not_eligible %}
+
+        <div class="other-heading">
+            Other Schemes
+        </div>
+
+        {% for s in not_eligible %}
+
+        <div class="scheme-card disabled-card">
+
+            <div class="scheme-card-left">
+
+                <div class="scheme-icon">
+                    📄
+                </div>
+
+                <div class="scheme-info">
+
+                    <h3>{{ s.name }}</h3>
+
+                    <p>
+                        Income range outside this scheme's limit
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="scheme-card-right">
+
+                <span class="not-eligible-badge">
+                    Not eligible
+                </span>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+        {% endif %}
+
+    </section>
+
+</div>
+
+
+<script>
+    const searchInput = document.getElementById("schemeSearch");
+
+    searchInput.addEventListener("input", function () {
+
+        const searchValue = this.value.toLowerCase();
+
+        document.querySelectorAll(".scheme-card").forEach(card => {
+
+            const schemeName =
+                card.querySelector("h3")?.textContent.toLowerCase() || "";
+
+            if (schemeName.includes(searchValue)) {
+                card.style.display = "flex";
+            } else {
+                card.style.display = "none";
+            }
+
+        });
+
+    });
+</script>
+
+{% endblock %}
+
+{% block bottom_nav %}
+<nav class="bottom-nav schemes-nav">
+
+    <a href="{{ url_for('dashboard') }}">
+        <i class="fa-solid fa-house"></i>
+        <span>Home</span>
+    </a>
+
+    <a href="{{ url_for('crop_advisory') }}">
+        <i class="fa-solid fa-seedling"></i>
+        <span>Crop</span>
+    </a>
+
+    <a href="{{ url_for('schemes') }}" class="active">
+        <i class="fa-solid fa-file-lines"></i>
+        <span>Schemes</span>
+    </a>
+
+    <a href="{{ url_for('sathi') }}">
+        <i class="fa-solid fa-robot"></i>
+        <span>Sathi</span>
+    </a>
+
+    <a href="{{ url_for('profile') }}">
+        <i class="fa-solid fa-user"></i>
+        <span>Profile</span>
+    </a>
+
+</nav>
+{% endblock %}

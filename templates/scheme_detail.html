@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% block title %}{{ scheme.name }} - Annadata{% endblock %}
+{% set active_nav = 'schemes' %}
+
+{% block content %}
+<head>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/scheme_detail.css') }}">
+</head>
+
+<main class="scheme-detail-page">
+  <header class="detail-header">
+    <a class="back-link" href="{{ url_for('schemes') }}"><span>←</span> {{ scheme.name }}</a>
+    <p class="detail-subtitle">Government support for Indian farmers</p>
+  </header>
+
+  <section class="scheme-hero">
+    <div class="scheme-hero-icon"><i class="fa-solid fa-indian-rupee-sign"></i></div>
+    <div class="scheme-hero-copy">
+      <p class="category-label">{{ scheme.category|upper }}</p>
+      <h1>{{ scheme.name }}</h1>
+      <p>Support and benefits for eligible farmer families</p>
+    </div>
+    <span class="eligible-tag">Eligible</span>
+  </section>
+
+  <section class="summary-grid">
+    
+    <div class="summary-left">
+        <article class="detail-card">
+            <h3>OVERVIEW</h3>
+            <p>{{ scheme.overview }}</p>
+        </article>
+
+        <article class="detail-card apply-steps-card">
+            <h3>HOW TO APPLY</h3>
+            <ol class="detail-list">
+                {% for step in scheme.how_to_apply.split('|') %}
+                    <li>{{ step }}</li>
+                {% endfor %}
+            </ol>
+        </article>
+    </div>
+
+   <article class="detail-card benefit-card">
+    <h3>ANNUAL BENEFIT</h3>
+
+    <div class="benefit-amount">
+        {{ scheme.benefits.split('|')[0] }}
+    </div>
+
+    <span class="muted">Government scheme benefit</span>
+</article>
+
+</section>
+  <section class="info-grid">
+    <article class="detail-card"><h3>BENEFITS</h3><ul class="detail-list">{% for b in scheme.benefits.split('|') %}<li>{{ b }}</li>{% endfor %}</ul></article>
+    <article class="detail-card"><h3>ELIGIBILITY</h3><ul class="detail-list">{% for e in scheme.eligibility.split('|') %}<li>{{ e }}</li>{% endfor %}</ul></article>
+  </section>
+
+  <article class="detail-card documents-card"><h3>DOCUMENTS REQUIRED</h3><ul class="detail-list">{% for d in scheme.documents.split('|') %}<li>{{ d }}</li>{% endfor %}</ul></article>
+
+  <div class="apply-row">
+    <a href="{{ scheme.official_link }}" target="_blank" rel="noopener noreferrer" class="apply-btn">Apply Now <i class="fa-solid fa-arrow-right"></i></a>
+    <button onclick="toggleSave({{ scheme.id }})" id="save-btn" class="save-btn" aria-label="Save scheme">{{ '★' if is_saved else '☆' }}</button>
+  </div>
+</main>
+
+<script>
+function toggleSave(id) {
+  fetch(`/scheme/${id}/save`, { method: 'POST' })
+    .then(r => r.json())
+    .then(data => { document.getElementById('save-btn').innerText = data.saved ? '★' : '☆'; });
+}
+</script>
+{% endblock %}
+
+{% block bottom_nav %}
+<nav class="scheme-detail-nav">
+  <a href="{{ url_for('dashboard') }}"><i class="fa-solid fa-house"></i><span>Home</span></a>
+  <a href="{{ url_for('crop_advisory') }}"><i class="fa-solid fa-seedling"></i><span>Crop</span></a>
+  <a href="{{ url_for('schemes') }}" class="active"><i class="fa-solid fa-file-lines"></i><span>Schemes</span></a>
+  <a href="{{ url_for('sathi') }}"><i class="fa-solid fa-robot"></i><span>Sathi</span></a>
+  <a href="{{ url_for('profile') }}"><i class="fa-solid fa-user"></i><span>Profile</span></a>
+</nav>
+{% endblock %}

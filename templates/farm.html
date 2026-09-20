@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Today's Farm Guide | Annadata</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/farm.css') }}">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/notifications.css') }}">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<script src="{{ url_for('static', filename='js/notifications.js') }}"></script>
+<body>
+
+<div class="farm-container">
+
+    <header class="top-bar">
+        <a href="{{ url_for('dashboard') }}" class="icon-btn">
+            <i class="fa-solid fa-arrow-left"></i>
+        </a>
+
+       <button class="icon-btn js-notif-bell" type="button">
+         <i class="fa-solid fa-bell"></i>
+             <span class="notification-dot"></span>
+        </button>
+    </header>
+
+    <section class="planner-heading">
+        <h1>Today's Farm Guide</h1>
+
+        {% if crops %}
+        <p>Simple actions for your {{ crops|join(', ')|title }} crop.</p>
+        {% else %}
+        <p>Add your crops in Profile to receive useful farm guidance.</p>
+        {% endif %}
+    </section>
+
+    {% if suggestions %}
+
+    <section class="guide-banner">
+        <i class="fa-solid fa-seedling"></i>
+
+        <div>
+            <h2>Small steps, healthier crops</h2>
+            <p>Mark a task done after you complete it.</p>
+        </div>
+    </section>
+
+    <section class="tasks-section">
+        <h2>Suggested for today</h2>
+
+        {% for task in suggestions %}
+        <article class="task-card">
+
+            <div class="task-icon">
+                <i class="fa-solid fa-leaf"></i>
+            </div>
+
+            <div class="task-info">
+                <span>{{ task.crop }} crop</span>
+                <h3>{{ task.title }}</h3>
+                <p>{{ task.reason }}</p>
+            </div>
+
+            <form action="{{ url_for('farm_action') }}" method="POST">
+                <input type="hidden" name="task_key" value="{{ task.task_key }}">
+
+                <button type="submit" name="action" value="done" class="done-btn">
+                    Done
+                </button>
+
+                <button type="submit" name="action" value="tomorrow" class="later-btn">
+                    Tomorrow
+                </button>
+            </form>
+
+        </article>
+        {% endfor %}
+    </section>
+
+    {% else %}
+
+    <section class="empty-guide">
+        <div>🌱</div>
+        <h2>You're all caught up!</h2>
+        <p>There are no farm actions for today. Come back tomorrow for fresh guidance.</p>
+    </section>
+
+    {% endif %}
+
+    {% if completed %}
+<section class="completed-section">
+
+    <h2>Completed today</h2>
+
+    {% for task in completed %}
+    <div class="completed-task">
+        <i class="fa-solid fa-circle-check"></i>
+
+        <div>
+            <h3>{{ task.title }}</h3>
+            <p>{{ task.crop }} crop</p>
+        </div>
+    </div>
+    {% endfor %}
+
+</section>
+{% endif %}
+
+    <a href="{{ url_for('profile') }}" class="profile-link">
+        <i class="fa-solid fa-pen"></i>
+        Update my crop details
+    </a>
+
+    <nav class="bottom-nav">
+        <a href="{{ url_for('dashboard') }}">
+            <i class="fa-solid fa-house"></i>
+            <span>Home</span>
+        </a>
+
+        <a href="{{ url_for('crop_advisory') }}">
+            <i class="fa-solid fa-seedling"></i>
+            <span>Crop</span>
+        </a>
+
+        <a href="{{ url_for('schemes') }}">
+            <i class="fa-solid fa-file-lines"></i>
+            <span>Schemes</span>
+        </a>
+
+        <a href="{{ url_for('sathi') }}">
+            <i class="fa-solid fa-robot"></i>
+            <span>Sathi</span>
+        </a>
+
+        <a href="{{ url_for('profile') }}">
+            <i class="fa-solid fa-user"></i>
+            <span>Profile</span>
+        </a>
+    </nav>
+
+</div>
+
+</body>
+</html>

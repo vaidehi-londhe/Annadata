@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Annadata</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/notifications.css') }}">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<script src="{{ url_for('static', filename='js/notifications.js') }}"></script>
+<body>
+
+<div class="phone-container">
+
+    <header class="top-bar">
+        <button class="icon-btn" type="button">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <button class="icon-btn notification-btn js-notif-bell" type="button">
+            <i class="fa-solid fa-bell"></i>
+            <span class="notification-dot"></span>
+        </button>
+    </header>
+
+    <section class="welcome-card">
+        <span class="greeting">🌿 Namaste,</span>
+
+        <h1>{{ user['name'] }}</h1>
+
+        <p>Good Morning! Have a productive farming day.</p>
+    </section>
+
+    <section class="weather-card">
+
+        <div class="weather-left">
+            <div class="weather-icon">☀️</div>
+
+            <div>
+                <h2>28°C</h2>
+                <span>Sunny</span>
+            </div>
+        </div>
+
+        <div class="weather-divider"></div>
+
+        <div class="weather-right">
+            <i class="fa-solid fa-location-dot"></i>
+
+            <div>
+                <strong>
+                    {{ user['district'] or 'Location not added' }}{% if user['state'] %}, {{ user['state'] }}{% endif %}
+                </strong>
+                <small>Today</small>
+            </div>
+        </div>
+
+    </section>
+
+    <section class="section-title">
+        <h2>Quick Actions</h2>
+        <a href="#">View All</a>
+    </section>
+
+    <div class="quick-grid">
+
+        <a href="{{ url_for('crop_advisory') }}" class="action-card green">
+            <div class="icon-box">
+                <i class="fa-solid fa-seedling"></i>
+            </div>
+
+            <h3>Crop Advisory</h3>
+
+            <p>Get personalized crop recommendations for your land.</p>
+
+            <span class="arrow">
+                <i class="fa-solid fa-arrow-right"></i>
+            </span>
+        </a>
+
+        <a href="{{ url_for('schemes') }}" class="action-card yellow">
+            <div class="icon-box">
+                <i class="fa-solid fa-file-lines"></i>
+            </div>
+
+            <h3>Government Schemes</h3>
+
+            <p>Explore subsidies, loans and farmer benefits.</p>
+
+            <span class="arrow">
+                <i class="fa-solid fa-arrow-right"></i>
+            </span>
+        </a>
+
+        <a href="{{ url_for('sathi') }}" class="action-card purple">
+            <div class="icon-box">
+                <i class="fa-solid fa-robot"></i>
+            </div>
+
+            <h3>Talk To Sathi</h3>
+
+            <p>Ask farming questions anytime with AI assistance.</p>
+
+            <span class="arrow">
+                <i class="fa-solid fa-arrow-right"></i>
+            </span>
+        </a>
+
+        <a href="{{ url_for('farm') }}" class="action-card blue">
+            <div class="icon-box">
+                <i class="fa-solid fa-calendar-days"></i>
+            </div>
+
+            <h3>Farm Planner</h3>
+
+            <p>Plan irrigation, harvesting and daily farming tasks.</p>
+
+            <span class="arrow">
+                <i class="fa-solid fa-arrow-right"></i>
+            </span>
+        </a>
+
+    </div>
+
+    <section class="section-title">
+        <h2>Your Farm</h2>
+        <a href="{{ url_for('profile') }}">View Details</a>
+    </section>
+
+    <div class="farm-overview">
+
+        <div class="info-card">
+            <div class="mini-icon green-bg">
+                <i class="fa-solid fa-seedling"></i>
+            </div>
+
+            <span class="label">Primary Crop</span>
+            <strong>{{ user['primary_crop'] }}</strong>
+        </div>
+
+        <div class="info-card">
+            <div class="mini-icon yellow-bg">
+                <i class="fa-solid fa-ruler-combined"></i>
+            </div>
+
+            <span class="label">Land</span>
+
+            <strong>
+                {% if user['land_size'] is not none %}
+                    {{ user['land_size'] }} {{ user['land_unit']|title }}
+                {% else %}
+                    Not added
+                {% endif %}
+            </strong>
+        </div>
+
+        <div class="info-card">
+            <div class="mini-icon blue-bg">
+                <i class="fa-solid fa-chart-line"></i>
+            </div>
+
+            <span class="label">Experience</span>
+            <strong>{{ user['experience'] }}</strong>
+        </div>
+
+        <div class="info-card">
+            <div class="mini-icon purple-bg">
+                <i class="fa-solid fa-indian-rupee-sign"></i>
+            </div>
+
+            <span class="label">Income</span>
+            <strong>{{ user['income'] }}</strong>
+        </div>
+
+    </div>
+
+    <section class="section-title">
+        <h2>4-Day Forecast</h2>
+    </section>
+
+    <div class="forecast-row">
+
+        <div class="forecast-card">
+            <strong>Mon</strong>
+            <i class="fa-solid fa-sun"></i>
+            <span>30°C</span>
+        </div>
+
+        <div class="forecast-card">
+            <strong>Tue</strong>
+            <i class="fa-solid fa-cloud-sun"></i>
+            <span>29°C</span>
+        </div>
+
+        <div class="forecast-card">
+            <strong>Wed</strong>
+            <i class="fa-solid fa-cloud-rain"></i>
+            <span>26°C</span>
+        </div>
+
+        <div class="forecast-card">
+            <strong>Thu</strong>
+            <i class="fa-solid fa-cloud"></i>
+            <span>27°C</span>
+        </div>
+
+    </div>
+
+    <section class="tip-card">
+        <div class="tip-icon">💡</div>
+
+        <div>
+            <h3>Today's Tip</h3>
+            <p>{{ tip }}</p>
+        </div>
+    </section>
+
+    <nav class="bottom-nav">
+
+        <a href="{{ url_for('dashboard') }}" class="active">
+            <i class="fa-solid fa-house"></i>
+            <span>Home</span>
+        </a>
+
+        <a href="{{ url_for('crop_advisory') }}">
+            <i class="fa-solid fa-seedling"></i>
+            <span>Crop</span>
+        </a>
+
+        <a href="{{ url_for('schemes') }}">
+            <i class="fa-solid fa-file-lines"></i>
+            <span>Schemes</span>
+        </a>
+
+        <a href="{{ url_for('sathi') }}">
+            <i class="fa-solid fa-robot"></i>
+            <span>Sathi</span>
+        </a>
+
+        <a href="{{ url_for('profile') }}">
+            <i class="fa-solid fa-user"></i>
+            <span>Profile</span>
+        </a>
+
+    </nav>
+
+</div>
+
+</body>
+</html>

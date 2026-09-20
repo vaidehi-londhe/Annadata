@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Saved Schemes | Annadata</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/saved_schemes.css') }}">
+</head>
+<nav class="bottom-nav">
+
+    <a href="{{ url_for('dashboard') }}">
+        <i class="fa-solid fa-house"></i>
+        <span>Home</span>
+    </a>
+
+    <a href="{{ url_for('crop_advisory') }}">
+        <i class="fa-solid fa-seedling"></i>
+        <span>Crop</span>
+    </a>
+
+    <a href="{{ url_for('schemes') }}" class="active">
+        <i class="fa-solid fa-file-lines"></i>
+        <span>Schemes</span>
+    </a>
+
+    <a href="{{ url_for('sathi') }}">
+        <i class="fa-solid fa-robot"></i>
+        <span>Sathi</span>
+    </a>
+
+    <a href="{{ url_for('profile') }}">
+        <i class="fa-solid fa-user"></i>
+        <span>Profile</span>
+    </a>
+
+</nav>
+<body>
+
+<div class="page">
+
+    <!-- Header -->
+    <div class="top">
+
+        <button class="back-btn" onclick="history.back()">←</button>
+
+        <div>
+            <h1>Saved Schemes</h1>
+            <p class="subtitle">
+                Schemes you've saved for later.
+            </p>
+        </div>
+
+    </div>
+
+
+    <!-- Saved Schemes -->
+    {% if saved %}
+
+        {% for scheme in saved %}
+
+        <div class="scheme-card">
+
+            <span class="category">
+                {{ scheme['category'] }}
+            </span>
+
+            <h2>
+                {{ scheme['name'] }}
+            </h2>
+
+            <p>
+                {{ scheme['overview'] }}
+            </p>
+
+            <div class="actions">
+
+                <a
+                    href="{{ url_for('scheme_detail', scheme_id=scheme['id']) }}"
+                    class="view-btn">
+                    View Details
+                </a>
+
+                <button
+                    class="remove-btn"
+                    onclick="removeScheme({{ scheme['id'] }}, this)">
+                    Remove
+                </button>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    {% else %}
+
+        <!-- Empty State -->
+        <div class="empty">
+
+            <div class="empty-icon">📄</div>
+
+            <h2>No saved schemes yet</h2>
+
+            <p>
+                Save useful government schemes and find them here later.
+            </p>
+
+            <a
+                href="{{ url_for('schemes') }}"
+                class="browse-btn">
+                Browse Schemes
+            </a>
+
+        </div>
+
+    {% endif %}
+
+</div>
+
+
+<script>
+
+async function removeScheme(schemeId, button) {
+
+    try {
+
+        const response = await fetch(
+            `/scheme/${schemeId}/save`,
+            {
+                method: 'POST'
+            }
+        );
+
+        const data = await response.json();
+
+        if (data.saved === false) {
+
+            button.closest('.scheme-card').remove();
+
+            if (
+                document.querySelectorAll('.scheme-card').length === 0
+            ) {
+                location.reload();
+            }
+        }
+
+    } catch (error) {
+
+        console.error("Error removing scheme:", error);
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>

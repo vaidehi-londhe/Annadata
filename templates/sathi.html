@@ -1,0 +1,150 @@
+{% extends "base.html" %}
+{% block title %}Sathi - Annadata{% endblock %}
+{% set show_nav = false %}
+
+{% block content %}
+
+<div class="sathi-shell">
+  <div class="sathi-header">
+    <div class="name">
+      <a href="{{ url_for('dashboard') }}">←</a>
+      <span style="width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;">🌿</span>
+      Sathi
+    </div>
+    <a href="tel:{{ helplines.kiran.number }}" id="help-btn" class="help-btn">Need help now?</a>
+  </div>
+
+  <div class="chat-body" id="chat-body">
+    {% if not history %}
+    <div class="msg"><div class="avatar"></div><div class="bubble">Hi, I'm Sathi. I'm here to listen if you want to talk about anything — your farm, your day, or anything on your mind.</div></div>
+    {% endif %}
+    {% for m in history %}
+    <div class="msg {{ 'user' if m.sender == 'user' else '' }}">
+      {% if m.sender == 'sathi' %}<div class="avatar"></div>{% endif %}
+      <div class="bubble">{{ m.message }}</div>
+    </div>
+    {% if m.flagged %}
+    <div class="escalation-box"><p class="title">Would you like to talk to someone who can help?</p><p>{{ helplines.kiran.name }} is free, confidential, and available anytime.</p></div>
+    <a href="tel:{{ helplines.kiran.number }}" class="btn-primary" style="background:var(--escalate); color:#3a2a10; margin-bottom:8px;">📞 Call {{ helplines.kiran.name }} — {{ helplines.kiran.number }}</a>
+    {% endif %}
+    {% endfor %}
+  </div>
+
+  <div class="chat-input-row">
+    <button type="button" id="mic-btn" class="mic-btn" title="Speak your message">🎙</button>
+
+    <input type="text" id="msg-input" placeholder="Type or speak a message...">
+
+    <button class="send-btn" onclick="sendMessage()">↑</button>
+</div>
+
+<script>
+const chatBody = document.getElementById('chat-body');
+chatBody.scrollTop = chatBody.scrollHeight;
+
+function appendMessage(text, sender) {
+    const msg = document.createElement('div');
+    msg.className = 'msg' + (sender === 'user' ? ' user' : '');
+
+    msg.innerHTML =
+        (sender === 'sathi' ? '<div class="avatar"></div>' : '') +
+        `<div class="bubble">${text}</div>`;
+
+    chatBody.appendChild(msg);
+    chatBody.scrollTop = chatBody.scrollHeight;
+}
+
+function sendMessage() {
+    const input = document.getElementById('msg-input');
+    const text = input.value.trim();
+
+    if (!text) return;
+
+    appendMessage(text, 'user');
+    input.value = '';
+
+    fetch("{{ url_for('sathi_send') }}", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: 'message=' + encodeURIComponent(text)
+    })
+    .then(r => r.json())
+    .then(data => {
+        appendMessage(data.reply, 'sathi');
+
+        if (data.flagged) {
+            document.getElementById('help-btn').classList.add('escalated');
+
+            const box = document.createElement('div');
+            box.className = 'escalation-box';
+            box.innerHTML = `
+                <p class="title">Would you like to talk to someone who can help?</p>
+                <p>${data.helplines.kiran.name} is free, confidential, and available anytime.</p>
+            `;
+            chatBody.appendChild(box);
+
+            const callBtn = document.createElement('a');
+            callBtn.href = 'tel:' + data.helplines.kiran.number;
+            callBtn.className = 'btn-primary';
+            callBtn.style.background = 'var(--escalate)';
+            callBtn.style.color = '#3a2a10';
+            callBtn.innerText =
+                `📞 Call ${data.helplines.kiran.name} — ${data.helplines.kiran.number}`;
+
+            chatBody.appendChild(callBtn);
+        }
+
+        chatBody.scrollTop = chatBody.scrollHeight;
+    })
+    .catch(() => {
+        appendMessage("Sorry, Sathi could not reply right now. Please try again.", "sathi");
+    });
+}
+
+document.getElementById('msg-input').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') {
+        e.preventDefault();
+        sendMessage();
+    }
+});
+
+const micButton = document.getElementById('mic-btn');
+const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+if (SpeechRecognition) {
+    const recognition = new SpeechRecognition();
+
+    recognition.lang = 'en-IN';
+    recognition.interimResults = false;
+    recognition.continuous = false;
+
+    micButton.addEventListener('click', () => {
+        recognition.start();
+        micButton.classList.add('recording');
+        micButton.textContent = '⏹';
+    });
+
+    recognition.onresult = (event) => {
+        document.getElementById('msg-input').value =
+            event.results[0][0].transcript;
+    };
+
+    recognition.onend = () => {
+        micButton.classList.remove('recording');
+        micButton.textContent = '🎙';
+    };
+
+    recognition.onerror = () => {
+        micButton.classList.remove('recording');
+        micButton.textContent = '🎙';
+        alert('Microphone could not be used. Please allow microphone permission.');
+    };
+} else {
+    micButton.disabled = true;
+    micButton.title = 'Voice input works in Chrome or Edge.';
+}
+
+</script>
+{% endblock %}

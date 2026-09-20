@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crop Advisory</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/crop.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/notifications.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+</head>
+<script src="{{ url_for('static', filename='js/notifications.js') }}"></script>
+<body>
+
+<div class="page">
+
+    <!-- Header -->
+    <header class="topbar">
+
+        <a href="{{ url_for('dashboard') }}" class="icon-btn">
+            <i class="fa-solid fa-arrow-left"></i>
+        </a>
+
+        <div class="title-area">
+            <h1>Crop Advisory</h1>
+            <p>Find the best crop for your farm.</p>
+        </div>
+
+        <button class="icon-btn js-notif-bell" type="button">
+            <i class="fa-solid fa-bell"></i>
+                <span class="notification-dot"></span>
+        </button>
+
+    </header>
+
+
+
+    <!-- Recommendation Banner -->
+
+    <section class="recommend-card">
+
+        <div class="recommend-left">
+
+            <div class="recommend-icon">
+                🌾
+            </div>
+
+            <div>
+
+                <span>Previously Recommended</span>
+
+                <h2>Rice</h2>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- FORM -->
+
+    <form action="{{ url_for('crop_advisory_results') }}" method="POST">
+
+
+
+        <!-- Soil -->
+
+        <section class="card">
+
+            <h3>
+                <i class="fa-solid fa-layer-group"></i>
+                Soil Type
+            </h3>
+
+            <div class="chips">
+
+                <input type="radio" id="loamy" name="soil_type" value="Loamy">
+                <label for="loamy">Loamy</label>
+
+                <input type="radio" id="clay" name="soil_type" value="Clay">
+                <label for="clay">Clay</label>
+
+                <input type="radio" id="sandy" name="soil_type" value="Sandy">
+                <label for="sandy">Sandy</label>
+
+                <input type="radio" id="black" name="soil_type" value="Black Soil">
+                <label for="black">Black Soil</label>
+
+                <input type="radio" id="red" name="soil_type" value="Red Soil">
+                <label for="red">Red Soil</label>
+
+            </div>
+
+        </section>
+
+
+
+
+        <!-- Water -->
+
+        <section class="card">
+
+            <h3>
+                <i class="fa-solid fa-droplet"></i>
+                Water Availability
+            </h3>
+
+            <div class="chips">
+
+                <input type="radio" id="low" name="water" value="Low">
+                <label for="low">Low</label>
+
+                <input type="radio" id="medium" name="water" value="Medium">
+                <label for="medium">Medium</label>
+
+                <input type="radio" id="high" name="water" value="High">
+                <label for="high">High</label>
+
+            </div>
+
+        </section>
+
+
+
+
+        <!-- Season -->
+
+        <section class="card">
+
+            <h3>
+
+                <i class="fa-solid fa-calendar"></i>
+
+                Season
+
+            </h3>
+
+            <div class="chips">
+
+                <input type="radio" id="kharif" name="season" value="Kharif">
+                <label for="kharif">Kharif</label>
+
+                <input type="radio" id="rabi" name="season" value="Rabi">
+                <label for="rabi">Rabi</label>
+
+                <input type="radio" id="zaid" name="season" value="Zaid">
+                <label for="zaid">Zaid</label>
+
+            </div>
+
+        </section>
+
+
+
+
+        <!-- Rainfall -->
+
+        <section class="card">
+
+            <h3>
+
+                <i class="fa-solid fa-cloud-rain"></i>
+
+                Expected Rainfall
+
+            </h3>
+
+            <select name="rainfall">
+
+                <option value="">Select rainfall</option>
+
+                <option>Low</option>
+
+                <option>Moderate</option>
+
+                <option>Heavy</option>
+
+            </select>
+
+        </section>
+
+               
+
+        <!-- Fertility -->
+
+        <section class="card">
+
+            <h3>
+                <i class="fa-solid fa-seedling"></i>
+                Soil Fertility
+            </h3>
+
+            <div class="chips">
+
+                <input type="radio" id="lowfertility" name="fertility" value="Low">
+                <label for="lowfertility">Low</label>
+
+                <input type="radio" id="mediumfertility" name="fertility" value="Medium">
+                <label for="mediumfertility">Medium</label>
+
+                <input type="radio" id="highfertility" name="fertility" value="High">
+                <label for="highfertility">High</label>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- Season Guide -->
+
+        <section class="guide-card">
+
+            <h3>
+                <i class="fa-solid fa-book-open"></i>
+                Season Guide
+            </h3>
+
+            <ul>
+
+                <li>
+                    <strong>Kharif</strong>
+                    <span>June – October (Monsoon)</span>
+                </li>
+
+                <li>
+                    <strong>Rabi</strong>
+                    <span>October – March (Winter)</span>
+                </li>
+
+                <li>
+                    <strong>Zaid</strong>
+                    <span>March – June (Summer)</span>
+                </li>
+
+            </ul>
+
+        </section>
+
+
+
+        <!-- Button -->
+
+    ...
+    <button type="submit" class="recommend-btn">
+        Get Recommendation
+    </button>
+</form>
+
+
+
+
+    <!-- Bottom Navigation -->
+
+    <nav class="bottom-nav">
+
+        <a href="{{ url_for('dashboard') }}">
+            <i class="fa-solid fa-house"></i>
+            <span>Home</span>
+        </a>
+
+        <a href="{{ url_for('crop_advisory') }}" class="active">
+            <i class="fa-solid fa-seedling"></i>
+            <span>Crop</span>
+        </a>
+
+        <a href="{{ url_for('schemes') }}">
+            <i class="fa-solid fa-file-lines"></i>
+            <span>Schemes</span>
+        </a>
+
+        <a href="{{ url_for('sathi') }}">
+            <i class="fa-solid fa-robot"></i>
+            <span>Sathi</span>
+        </a>
+
+        <a href="{{ url_for('profile') }}">
+            <i class="fa-solid fa-user"></i>
+            <span>Profile</span>
+        </a>
+
+    </nav>
+
+</div>
+
+</body>
+</html>

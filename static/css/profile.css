@@ -1,0 +1,731 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+
+body {
+
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+
+    color: #24441d;
+
+    background:
+        linear-gradient(
+            180deg,
+            #f7ffb6 0%,
+            #f4ffa2 45%,
+            #efff95 100%
+        );
+}
+
+
+.phone-container {
+
+    width: 100%;
+
+    max-width: 750px;
+
+    min-height: 100vh;
+
+    padding: 28px 30px 140px;
+}
+
+
+/* =========================================
+   TOP BAR
+========================================= */
+
+.top-bar {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 26px;
+}
+
+
+.icon-btn {
+
+    width: 48px;
+    height: 48px;
+
+    border: none;
+
+    border-radius: 16px;
+
+    background: rgba(255,255,255,.72);
+
+    box-shadow:
+        0 8px 20px rgba(58,91,22,.08);
+
+    color: #295d1b;
+
+    font-size: 18px;
+
+    cursor: pointer;
+}
+
+
+/* =========================================
+   PROFILE HEADER
+========================================= */
+
+.profile-header-card {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+
+    margin-bottom: 32px;
+
+    padding: 26px 28px;
+
+    background: #ffffff;
+
+    border-radius: 28px;
+
+    box-shadow:
+        0 10px 30px rgba(58,91,22,.09);
+}
+
+
+.profile-avatar {
+
+    width: 72px;
+    height: 72px;
+
+    flex-shrink: 0;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 22px;
+
+    background: #34873e;
+
+    color: white;
+
+    font-size: 28px;
+
+    font-weight: 700;
+}
+
+
+.profile-label {
+
+    display: block;
+
+    margin-bottom: 3px;
+
+    color: #888;
+
+    font-size: 13px;
+}
+
+
+.profile-header-info h1 {
+
+    color: #173f12;
+
+    font-size: 27px;
+
+    line-height: 1.25;
+
+    font-weight: 700;
+}
+
+
+.profile-header-info p {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    margin-top: 7px;
+
+    color: #777;
+
+    font-size: 13px;
+}
+
+
+.profile-header-info p i {
+
+    color: #396c28;
+}
+
+
+/* =========================================
+   SECTION TITLES
+========================================= */
+
+.section-title {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin: 0 2px 18px;
+}
+
+
+.section-title h2 {
+
+    color: #1c4812;
+
+    font-size: 22px;
+}
+
+
+.section-title a {
+
+    color: #3b7b2c;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    text-decoration: none;
+}
+
+
+.profile-section-heading {
+
+    margin-top: 38px;
+}
+
+
+/* =========================================
+   FARM INFORMATION
+========================================= */
+
+.profile-farm-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 18px;
+}
+
+
+.profile-info-card {
+
+    min-height: 160px;
+
+    padding: 20px;
+
+    background: #ffffff;
+
+    border-radius: 22px;
+
+    box-shadow:
+        0 10px 25px rgba(58,91,22,.09);
+
+    transition: transform .25s ease;
+}
+
+
+.profile-info-card:hover {
+
+    transform: translateY(-4px);
+}
+
+
+.profile-mini-icon {
+
+    width: 50px;
+    height: 50px;
+
+    display: grid;
+
+    place-items: center;
+
+    margin-bottom: 14px;
+
+    border-radius: 16px;
+}
+
+
+.profile-mini-icon i {
+
+    color: white;
+
+    font-size: 20px;
+}
+
+
+.green-icon {
+    background: #43b04d;
+}
+
+
+.yellow-icon {
+    background: #f4b731;
+}
+
+
+.blue-icon {
+    background: #2ba6ff;
+}
+
+
+.purple-icon {
+    background: #7a5cff;
+}
+
+
+.profile-info-card span {
+
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #888;
+
+    font-size: 12px;
+}
+
+
+.profile-info-card strong {
+
+    display: block;
+
+    color: #214b18;
+
+    font-size: 15px;
+}
+
+
+/* =========================================
+   FARM LOCATION
+========================================= */
+
+.location-card {
+
+    padding: 5px 20px;
+
+    background: white;
+
+    border-radius: 24px;
+
+    box-shadow:
+        0 10px 25px rgba(58,91,22,.09);
+}
+
+
+.location-row {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 18px 0;
+
+    border-bottom: 1px solid #eeeeee;
+}
+
+
+.location-row:last-child {
+
+    border-bottom: none;
+}
+
+
+.location-row span {
+
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: #888;
+
+    font-size: 12px;
+}
+
+
+.location-row strong {
+
+    color: #214b18;
+
+    font-size: 14px;
+}
+
+
+.location-row > i {
+
+    color: #3f7f2c;
+
+    font-size: 17px;
+}
+
+
+/* =========================================
+   ACCOUNT
+========================================= */
+
+.account-card {
+
+    overflow: hidden;
+
+    padding: 5px 20px;
+
+    background: white;
+
+    border-radius: 24px;
+
+    box-shadow:
+        0 10px 25px rgba(58,91,22,.09);
+}
+
+
+.account-row {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    min-height: 66px;
+
+    color: #173f12;
+
+    text-decoration: none;
+
+    border-bottom: 1px solid #eeeeee;
+}
+
+
+.account-row:last-child {
+
+    border-bottom: none;
+}
+
+
+.account-icon {
+
+    width: 40px;
+    height: 40px;
+
+    flex-shrink: 0;
+
+    display: grid;
+
+    place-items: center;
+
+    border-radius: 13px;
+
+    background: #e8f6da;
+
+    color: #3f7f2c;
+}
+
+
+.account-row span {
+
+    flex: 1;
+
+    font-size: 14px;
+
+    font-weight: 500;
+}
+
+
+.account-row > i {
+
+    color: #3f7f2c;
+
+    font-size: 14px;
+}
+
+
+/* =========================================
+   LOGOUT
+========================================= */
+
+.logout-btn {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    height: 52px;
+
+    margin-top: 20px;
+
+    margin-bottom: 20px;
+
+    border: 1px solid #f0cccc;
+
+    border-radius: 18px;
+
+    background: white;
+
+    color: #e05a5a;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    text-decoration: none;
+}
+
+
+/* =========================================
+   BOTTOM NAV
+========================================= */
+
+.bottom-nav {
+
+    position: fixed;
+
+    z-index: 999;
+
+    bottom: 18px;
+
+    left: 50%;
+
+    width: min(
+        750px,
+        calc(100% - 36px)
+    );
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-around;
+
+    padding: 14px 0;
+
+    transform: translateX(-50%);
+
+    border-radius: 28px;
+
+    background: rgba(255,255,255,.92);
+
+    box-shadow:
+        0 15px 35px rgba(0,0,0,.15);
+
+    backdrop-filter: blur(15px);
+}
+
+
+.bottom-nav a {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 6px;
+
+    color: #888;
+
+    font-size: 12px;
+
+    text-decoration: none;
+}
+
+
+.bottom-nav a i {
+
+    font-size: 21px;
+}
+
+
+.bottom-nav a.active {
+
+    color: #2f6b1f;
+
+    font-weight: 600;
+}
+
+
+.bottom-nav a.active i {
+
+    width: 46px;
+    height: 46px;
+
+    display: grid;
+
+    place-items: center;
+
+    border-radius: 50%;
+
+    background: #e8f6da;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 430px) {
+
+    .phone-container {
+
+        padding:
+            20px
+            18px
+            120px;
+    }
+
+
+    .profile-header-card {
+
+        padding: 22px 20px;
+
+        border-radius: 24px;
+    }
+
+
+    .profile-avatar {
+
+        width: 62px;
+        height: 62px;
+
+        border-radius: 19px;
+
+        font-size: 24px;
+    }
+
+
+    .profile-header-info h1 {
+
+        font-size: 21px;
+    }
+
+
+    .profile-farm-grid {
+
+        gap: 14px;
+    }
+
+
+    .profile-info-card {
+
+        min-height: 145px;
+
+        padding: 17px;
+    }
+
+
+    .location-card,
+    .account-card {
+
+        border-radius: 21px;
+    }
+
+
+    .bottom-nav {
+
+        width: calc(100% - 28px);
+    }
+
+
+    .bottom-nav a {
+
+        font-size: 11px;
+    }
+
+}
+/* More creative profile hero */
+.profile-header-card {
+    position: relative;
+    overflow: hidden;
+    color: #ffffff;
+    background: linear-gradient(135deg, #307b34, #64ab4d);
+}
+
+.profile-header-card::after {
+    content: "🌾";
+    position: absolute;
+    right: 28px;
+    bottom: -32px;
+    opacity: 0.18;
+    font-size: 120px;
+}
+
+.profile-avatar {
+    background: rgba(255, 255, 255, 0.22);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.profile-label,
+.profile-header-info p,
+.profile-header-info h1 {
+    color: #ffffff;
+}
+
+.profile-header-info p i {
+    color: #d9ff69;
+}
+
+/* Farm Guide quick link */
+.farm-guide-card {
+    display: grid;
+    grid-template-columns: 58px 1fr auto;
+    align-items: center;
+    gap: 15px;
+    margin: -14px 0 34px;
+    padding: 18px;
+    border-radius: 22px;
+    color: #174b9b;
+    background: #d8ecff;
+    box-shadow: 0 10px 25px rgba(58, 91, 22, 0.09);
+    text-decoration: none;
+}
+
+.farm-guide-icon {
+    width: 58px;
+    height: 58px;
+    display: grid;
+    place-items: center;
+    border-radius: 17px;
+    color: #ffffff;
+    background: #2ba6ff;
+    font-size: 23px;
+}
+
+.farm-guide-card span {
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.farm-guide-card h3 {
+    margin-top: 2px;
+    font-size: 16px;
+}
+
+.farm-guide-card p {
+    margin-top: 4px;
+    color: #4a6d87;
+    font-size: 12px;
+}
+
+.farm-guide-card > i {
+    font-size: 17px;
+}

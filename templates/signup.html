@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Annadata - Sign Up</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/auth.css') }}">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="signup-container">
+
+    <!-- Top Header -->
+    <div class="header">
+
+        <div class="logo">
+
+            <i class="fa-solid fa-seedling"></i>
+
+            <h1>ANNADATA</h1>
+
+            <h2>अन्नदाता</h2>
+
+        </div>
+
+    </div>
+
+
+    <!-- Form -->
+
+    <div class="form-container">
+
+        <h1>Create Account</h1>
+
+        <p class="subtitle">
+            Join us and empower your farming journey
+        </p>
+        {% if error %}
+        <div class="signup-error">
+            {{ error }}
+        </div>
+        {% endif %}
+
+
+        <form action="/signup" method="POST">
+
+            <!-- Name -->
+
+            <div class="input-box">
+
+                <i class="fa-regular fa-user"></i>
+
+                <input
+                type="text"
+                name="full_name"
+                placeholder="Full Name"
+                required>
+
+            </div>
+
+
+            <!-- Mobile -->
+
+            <div class="input-box">
+
+                <i class="fa-solid fa-phone"></i>
+
+                <input
+                type="tel"
+                name="phone"
+                placeholder="Mobile Number"
+                maxlength="10"
+                required>
+
+            </div>
+
+
+            <!-- Password -->
+
+            <div class="input-box password-box">
+
+                <i class="fa-solid fa-lock"></i>
+
+                <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Password"
+                required>
+
+                <i
+                class="fa-regular fa-eye-slash toggle-password"
+                onclick="togglePassword('password',this)">
+                </i>
+
+            </div>
+
+
+            <!-- Confirm Password -->
+
+            <div class="input-box password-box">
+
+                <i class="fa-solid fa-lock"></i>
+
+                <input
+                type="password"
+                id="confirmPassword"
+                name="confirm_password"
+                placeholder="Confirm Password"
+                required>
+
+                <i
+                class="fa-regular fa-eye-slash toggle-password"
+                onclick="togglePassword('confirmPassword',this)">
+                </i>
+
+            </div>
+
+
+            <!-- Checkbox -->
+
+            <div class="checkbox">
+
+                <input
+                type="checkbox"
+                id="updates">
+
+                <label for="updates">
+
+                    I agree to receive scheme updates
+                    on my mobile number
+
+                </label>
+
+            </div>
+
+
+            <!-- Button -->
+
+            <button
+            type="submit"
+            class="signup-btn">
+
+                CREATE ACCOUNT
+
+            </button>
+
+
+            <!-- Divider -->
+
+            <div class="divider">
+
+                <span></span>
+
+                <p>OR</p>
+
+                <span></span>
+
+            </div>
+
+
+            <!-- Login -->
+
+            <p class="login-text">
+
+                Already have an account?
+
+                <a href="/login">
+
+                    Login
+
+                </a>
+
+            </p>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<script>
+
+function togglePassword(id,icon){
+
+const input=document.getElementById(id);
+
+if(input.type==="password"){
+
+input.type="text";
+
+icon.classList.remove("fa-eye-slash");
+
+icon.classList.add("fa-eye");
+
+}
+
+else{
+
+input.type="password";
+
+icon.classList.remove("fa-eye");
+
+icon.classList.add("fa-eye-slash");
+
+}
+
+}
+
+</script>
+
+</body>
+</html>

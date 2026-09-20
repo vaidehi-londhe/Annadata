@@ -1,0 +1,1059 @@
+/* ===================================
+   RESET
+=================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+
+    background:linear-gradient(
+        180deg,
+        #f7ffb6 0%,
+        #f3ffa0 45%,
+        #efff92 100%
+    );
+
+    display:flex;
+    justify-content:center;
+
+    min-height:100vh;
+
+    color:#23451d;
+
+}
+
+
+/* ===================================
+   PAGE
+=================================== */
+
+.page{
+
+    width:100%;
+    max-width:750px;
+
+    min-height:100vh;
+
+    padding:50px 18px 110px;
+
+}
+
+
+/* ===================================
+   TOP BAR
+=================================== */
+
+.topbar{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    margin-bottom:30px;
+
+}
+
+.icon-btn{
+
+    width:48px;
+
+    height:48px;
+
+    border:none;
+
+    border-radius:16px;
+
+    background:#ffffff;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    text-decoration:none;
+
+    color:#2f6b1f;
+
+    font-size:18px;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+    cursor:pointer;
+
+}
+
+.title-area{
+
+    flex:1;
+
+    margin-left:20px;
+
+}
+
+.title-area h1{
+
+    font-size:35px;
+
+    font-weight:700;
+
+    color:#214b18;
+
+}
+
+.title-area p{
+
+    color:#66785c;
+
+    font-size:18px;
+
+    margin-top:4px;
+
+}
+
+
+/* ===================================
+   RECOMMEND CARD
+=================================== */
+
+.recommend-card{
+
+    background:linear-gradient(
+        135deg,
+        #3f7f2c,
+        #5aa53e
+    );
+
+    border-radius:30px;
+
+    padding:24px;
+
+    color:white;
+
+    margin-bottom:28px;
+
+    box-shadow:0 15px 35px rgba(0,0,0,.12);
+
+}
+
+.recommend-left{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:18px;
+
+}
+
+.recommend-icon{
+
+    width:72px;
+
+    height:72px;
+
+    border-radius:22px;
+
+    background:rgba(255,255,255,.18);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:34px;
+
+}
+
+.recommend-left span{
+
+    opacity:.9;
+
+    font-size:14px;
+
+}
+
+.recommend-left h2{
+
+    font-size:30px;
+
+    margin-top:6px;
+
+}
+
+
+/* ===================================
+   FORM CARD
+=================================== */
+
+.card{
+
+    background:#ffffff;
+
+    border-radius:24px;
+
+    padding:22px;
+
+    margin-bottom:20px;
+
+    box-shadow:0 10px 25px rgba(250, 248, 248, 0.08);
+
+}
+
+.card h3{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    font-size:18px;
+
+    color:#214b18;
+
+    margin-bottom:18px;
+
+}
+
+.card h3 i{
+
+    color:#3f7f2c;
+
+}
+
+
+/* ===================================
+   CHIPS
+=================================== */
+
+.chips{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:12px;
+
+}
+
+.chips input{
+
+    display:none;
+
+}
+
+.chips label{
+
+    padding:12px 18px;
+
+    background:#eef7e7;
+
+    border-radius:50px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+    font-size:14px;
+
+    color:#315928;
+
+    border:2px solid transparent;
+
+}
+
+.chips label:hover{
+
+    background:#dff3cf;
+
+}
+
+.chips input:checked + label{
+
+    background:#3f7f2c;
+
+    color:white;
+
+    border-color:#3f7f2c;
+
+}
+
+
+/* ===================================
+   SELECT
+=================================== */
+
+select{
+
+    width:100%;
+
+    padding:15px 18px;
+
+    border-radius:16px;
+
+    border:2px solid #dbe7d2;
+
+    background:white;
+
+    font-size:15px;
+
+    color:#2d4d25;
+
+    outline:none;
+
+    transition:.3s;
+
+}
+
+select:focus{
+
+    border-color:#3f7f2c;
+
+    box-shadow:0 0 0 4px rgba(63,127,44,.12);
+
+}
+
+/* ===================================
+   SEASON GUIDE CARD
+=================================== */
+
+.guide-card{
+
+    background:#ffffff;
+
+    border-radius:24px;
+
+    padding:24px;
+
+    margin-bottom:28px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+}
+
+.guide-card h3{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    color:#214b18;
+
+    margin-bottom:20px;
+
+    font-size:18px;
+
+}
+
+.guide-card h3 i{
+
+    color:#3f7f2c;
+
+}
+
+.guide-card ul{
+
+    list-style:none;
+
+}
+
+.guide-card li{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:14px 0;
+
+    border-bottom:1px solid #eef2eb;
+
+}
+
+.guide-card li:last-child{
+
+    border-bottom:none;
+
+}
+
+.guide-card strong{
+
+    color:#214b18;
+
+}
+
+.guide-card span{
+
+    color:#7b8b72;
+
+    font-size:14px;
+
+}
+
+
+/* ===================================
+   RECOMMEND BUTTON
+=================================== */
+
+.recommend-btn{
+
+    width:100%;
+
+    padding:18px;
+
+    border:none;
+
+    border-radius:20px;
+
+    background:linear-gradient(
+        135deg,
+        #3f7f2c,
+        #5ca53d
+    );
+
+    color:white;
+
+    font-size:17px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:10px;
+
+    box-shadow:0 12px 25px rgba(63,127,44,.30);
+
+    transition:.3s;
+
+    margin-bottom:95px;
+
+}
+
+.recommend-btn:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 16px 35px rgba(63,127,44,.35);
+
+}
+
+
+/* ===================================
+   BOTTOM NAVIGATION
+=================================== */
+
+.bottom-nav{
+
+    position:fixed;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    bottom:18px;
+
+    width:750px;
+
+    max-width:92%;
+
+    background:rgba(249, 250, 247, 0.94);
+
+    backdrop-filter:blur(15px);
+
+    border-radius:28px;
+
+    display:flex;
+
+    justify-content:space-around;
+
+    align-items:center;
+
+    padding:14px 0;
+
+    box-shadow:0 15px 35px rgba(0,0,0,.15);
+
+    z-index:999;
+
+}
+
+.bottom-nav a{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    gap:6px;
+
+    text-decoration:none;
+
+    color:#8b8b8b;
+
+    font-size:12px;
+
+    transition:.3s;
+
+}
+
+.bottom-nav a i{
+
+    font-size:21px;
+
+}
+
+.bottom-nav a.active{
+
+    color:#2f6b1f;
+
+    font-weight:600;
+
+}
+
+.bottom-nav a.active i{
+
+    width:46px;
+
+    height:46px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    border-radius:50%;
+
+    background:#e6f6d7;
+
+    box-shadow:0 6px 16px rgba(63,127,44,.20);
+
+}
+
+
+/* ===================================
+   HOVER EFFECTS
+=================================== */
+
+.card,
+.guide-card,
+.recommend-card{
+
+    transition:.3s;
+
+}
+
+.card:hover,
+.guide-card:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:0 14px 32px rgba(0,0,0,.10);
+
+}
+
+
+/* ===================================
+   SCROLLBAR
+=================================== */
+
+::-webkit-scrollbar{
+
+    width:7px;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#7caf5a;
+
+    border-radius:10px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#eef7e8;
+
+}
+
+
+/* ===================================
+   ANIMATION
+=================================== */
+
+.topbar,
+.recommend-card,
+.card,
+.guide-card,
+.recommend-btn{
+
+    animation:fadeUp .6s ease;
+
+}
+
+@keyframes fadeUp{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(25px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+
+/* ===================================
+   RESPONSIVE
+=================================== */
+
+@media(max-width:430px){
+
+    .page{
+
+        padding:18px 16px 110px;
+
+    }
+
+    .title-area h1{
+
+        font-size:23px;
+
+    }
+
+    .recommend-left{
+
+        gap:14px;
+
+    }
+
+    .recommend-icon{
+
+        width:64px;
+        height:64px;
+        font-size:30px;
+
+    }
+
+    .card{
+
+        padding:20px;
+
+    }
+
+    .chips{
+
+        gap:10px;
+
+    }
+
+    .chips label{
+
+        font-size:13px;
+
+        padding:10px 16px;
+
+    }
+
+}
+/* Crop result ko dashboard jaisa wide layout dene ke liye */
+body:has(.result-screen) {
+    background: linear-gradient(180deg, #f7ffb6 0%, #f4ffa2 45%, #efff95 100%);
+}
+
+body:has(.result-screen) .phone-shell {
+    width: 100%;
+    max-width: 750px;
+    min-height: 100vh;
+    height: auto !important;
+    overflow: visible !important;
+    background: transparent;
+}
+
+body:has(.result-screen) .result-screen {
+    padding: 28px 30px 132px;
+}
+
+body:has(.result-screen) .result-screen h2 {
+    color: #214b18;
+}
+
+body:has(.result-screen) .result-screen .subtitle {
+    color: #536050;
+}
+
+body:has(.result-screen) .result-screen .card {
+    background: #ffffff;
+    border-radius: 24px;
+    box-shadow: 0 10px 25px rgba(58, 91, 22, 0.09);
+}
+
+body:has(.result-screen) .bottom-nav {
+    width: min(750px, calc(100% - 36px));
+    background: rgba(255, 255, 255, 0.92);
+    border-radius: 28px;
+}
+
+@media (max-width: 430px) {
+    body:has(.result-screen) .result-screen {
+        padding: 20px 18px 120px;
+    }
+}
+
+/* Actual crop image */
+.result-screen .crop-photo {
+    height: 145px;
+    overflow: hidden;
+    border-radius: 24px 24px 0 0;
+}
+
+.result-screen .crop-photo img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+/* Crop result cards */
+.result-screen .card {
+    padding: 0 !important;
+    overflow: hidden;
+    border-radius: 24px !important;
+}
+
+.result-screen .card > div:last-child {
+    padding: 16px;
+}
+
+.result-screen .card h3 {
+    color: #214b18;
+    font-size: 18px;
+}
+
+.result-screen .card p {
+    color: #61705b;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.result-nav {
+    position: fixed;
+    z-index: 999;
+    bottom: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(750px, calc(100% - 36px));
+    padding: 14px 0;
+    border: 0;
+    border-radius: 28px;
+    background: rgba(255, 255, 255, 0.94);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+.result-nav a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    color: #888;
+    font-size: 12px;
+    text-decoration: none;
+}
+
+.result-nav a i {
+    font-size: 21px;
+}
+
+.result-nav a.active {
+    color: #2f6b1f;
+    font-weight: 600;
+}
+
+.result-nav a.active i {
+    width: 46px;
+    height: 46px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: #e8f6da;
+}
+
+@media (max-width: 430px) {
+    .result-screen .crop-photo {
+        height: 110px;
+    }
+
+    .result-nav {
+        width: calc(100% - 28px);
+    }
+}
+/* ===== CROP RESULT SCROLL FIX ===== */
+
+body:has(.result-screen) {
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+}
+
+body:has(.result-screen) .phone-shell {
+    height: auto !important;
+    min-height: 100vh !important;
+    overflow: visible !important;
+}
+
+.result-screen {
+    height: auto !important;
+    min-height: 100vh !important;
+    overflow: visible !important;
+}
+.notification-btn {
+    position: relative;
+}
+
+.notification-dot {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 10px;
+    height: 10px;
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+    background: #ef5b5b;
+}
+/* Crop detail page — dashboard style */
+.crop-detail-container {
+    width: 100%;
+    max-width: 750px;
+    min-height: 100vh;
+    padding: 28px 30px 132px;
+}
+
+.crop-detail-topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.crop-detail-icon-btn {
+    width: 48px;
+    height: 48px;
+    display: grid;
+    place-items: center;
+    border: 0;
+    border-radius: 16px;
+    color: #2f6b1f;
+    background: rgba(255, 255, 255, 0.75);
+    box-shadow: 0 8px 20px rgba(58, 91, 22, 0.08);
+    font-size: 18px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.crop-detail-heading {
+    margin: 28px 0 22px;
+}
+
+.crop-detail-heading span {
+    color: #3f7f2c;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.crop-detail-heading h1 {
+    margin-top: 4px;
+    color: #214b18;
+    font-size: 36px;
+}
+
+.crop-detail-heading p {
+    margin-top: 8px;
+    color: #61705b;
+    font-size: 16px;
+}
+
+.crop-hero-image {
+    height: 350px;
+    overflow: hidden;
+    border-radius: 30px;
+    box-shadow: 0 15px 35px rgba(58, 91, 22, 0.16);
+}
+
+.crop-hero-image img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+.crop-detail-section {
+    margin-top: 38px;
+}
+
+.crop-detail-section h2,
+.crop-why-card h2 {
+    color: #214b18;
+    font-size: 23px;
+}
+
+.crop-condition-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-top: 18px;
+}
+
+.crop-condition-card {
+    min-height: 155px;
+    padding: 18px;
+    border-radius: 22px;
+}
+
+.crop-condition-card i {
+    display: grid;
+    width: 45px;
+    height: 45px;
+    place-items: center;
+    margin-bottom: 15px;
+    border-radius: 14px;
+    color: #ffffff;
+    font-size: 18px;
+}
+
+.crop-condition-card span {
+    display: block;
+    margin-bottom: 4px;
+    color: #63705e;
+    font-size: 12px;
+}
+
+.crop-condition-card strong {
+    color: #214b18;
+    font-size: 15px;
+}
+
+.green-condition {
+    background: #e4f6da;
+}
+
+.green-condition i {
+    background: #43b04d;
+}
+
+.blue-condition {
+    background: #dcefff;
+}
+
+.blue-condition i {
+    background: #2ba6ff;
+}
+
+.yellow-condition {
+    background: #fff4bf;
+}
+
+.yellow-condition i {
+    background: #f4b731;
+}
+
+.purple-condition {
+    background: #f0e0f7;
+}
+
+.purple-condition i {
+    background: #7564ff;
+}
+
+.crop-why-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+    margin-top: 30px;
+    padding: 24px;
+    border-radius: 26px;
+    background: #ffffff;
+    box-shadow: 0 10px 25px rgba(58, 91, 22, 0.09);
+}
+
+.crop-why-icon {
+    width: 55px;
+    height: 55px;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    border-radius: 17px;
+    color: #d18b00;
+    background: #fff4bf;
+    font-size: 23px;
+}
+
+.crop-why-card p {
+    margin-top: 7px;
+    color: #61705b;
+    line-height: 1.6;
+}
+
+.try-again-btn {
+    display: block;
+    margin-top: 24px;
+    padding: 17px;
+    border-radius: 18px;
+    color: #ffffff;
+    background: linear-gradient(135deg, #3f7f2c, #5ca53d);
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+}
+
+.try-again-btn i {
+    margin-right: 8px;
+}
+
+@media (max-width: 600px) {
+    .crop-detail-container {
+        padding: 20px 16px 120px;
+    }
+
+    .crop-detail-heading h1 {
+        font-size: 30px;
+    }
+
+    .crop-hero-image {
+        height: 250px;
+    }
+
+    .crop-condition-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+    }
+
+    .crop-condition-card {
+        min-height: 140px;
+    }
+}

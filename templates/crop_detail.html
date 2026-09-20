@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{{ crop.name }} | Annadata</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/crop.css') }}">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+
+<div class="crop-detail-container">
+
+    <header class="crop-detail-topbar">
+        <a href="javascript:history.back()" class="crop-detail-icon-btn">
+            <i class="fa-solid fa-arrow-left"></i>
+        </a>
+
+        <button class="crop-detail-icon-btn notification-btn js-notif-bell"
+                type="button">
+            <i class="fa-solid fa-bell"></i>
+            <span class="notification-dot"></span>
+        </button>
+    </header>
+
+    <section class="crop-detail-heading">
+        <span>{{ crop.season }} crop</span>
+        <h1>{{ crop.name }}</h1>
+        <p>{{ crop.reason }}</p>
+    </section>
+
+    <section class="crop-hero-image">
+        <img src="{{ url_for('static', filename='images/crops/' + image_filename) }}"
+             alt="{{ crop.name }} crop">
+    </section>
+
+    <section class="crop-detail-section">
+        <h2>Growing Conditions</h2>
+
+        <div class="crop-condition-grid">
+
+            <div class="crop-condition-card green-condition">
+                <i class="fa-solid fa-layer-group"></i>
+                <span>Soil Type</span>
+                <strong>{{ crop.soil_type }}</strong>
+            </div>
+
+            <div class="crop-condition-card blue-condition">
+                <i class="fa-solid fa-droplet"></i>
+                <span>Water Need</span>
+                <strong>{{ crop.water_need }}</strong>
+            </div>
+
+            <div class="crop-condition-card yellow-condition">
+                <i class="fa-solid fa-calendar"></i>
+                <span>Season</span>
+                <strong>{{ crop.season }}</strong>
+            </div>
+
+            <div class="crop-condition-card purple-condition">
+                <i class="fa-solid fa-clock"></i>
+                <span>Duration</span>
+                <strong>{{ crop.duration_days }} days</strong>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="crop-why-card">
+        <div class="crop-why-icon">
+            <i class="fa-solid fa-lightbulb"></i>
+        </div>
+
+        <div>
+            <h2>Why this crop?</h2>
+            <p>{{ crop.reason }}</p>
+        </div>
+    </section>
+
+    <a href="{{ url_for('crop_advisory') }}" class="try-again-btn">
+        <i class="fa-solid fa-arrow-rotate-left"></i>
+        Try another recommendation
+    </a>
+
+    <nav class="bottom-nav">
+
+        <a href="{{ url_for('dashboard') }}">
+            <i class="fa-solid fa-house"></i>
+            <span>Home</span>
+        </a>
+
+        <a href="{{ url_for('crop_advisory') }}" class="active">
+            <i class="fa-solid fa-seedling"></i>
+            <span>Crop</span>
+        </a>
+
+        <a href="{{ url_for('schemes') }}">
+            <i class="fa-solid fa-file-lines"></i>
+            <span>Schemes</span>
+        </a>
+
+        <a href="{{ url_for('sathi') }}">
+            <i class="fa-solid fa-robot"></i>
+            <span>Sathi</span>
+        </a>
+
+        <a href="{{ url_for('profile') }}">
+            <i class="fa-solid fa-user"></i>
+            <span>Profile</span>
+        </a>
+
+    </nav>
+
+</div>
+
+<script src="{{ url_for('static', filename='js/notifications.js') }}"></script>
+
+</body>
+</html>

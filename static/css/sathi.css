@@ -1,0 +1,52 @@
+/* ---------- Chat (Sathi): powder-blue UI ---------- */
+body:has(.sathi-shell) { background:#bfe3f2; }
+body:has(.sathi-shell) .phone-shell { width:100%; max-width:none; min-height:100vh; background:#bfe3f2; }
+
+.sathi-shell { width:100%; max-width:760px; min-height:100vh; margin:0 auto; display:flex; flex-direction:column; background:#eaf8fc; color:#173d47; }
+.sathi-header { display:flex; align-items:center; justify-content:space-between; padding:20px 26px; background:#d2eff7; border-bottom:1px solid #b8e1ec; }
+.sathi-header .name { display:flex; align-items:center; gap:10px; margin:0; color:#173d47; font-size:20px; font-weight:700; }.sathi-header .name > a { width:38px; height:38px; display:grid; place-items:center; border-radius:50%; background:#fff; color:#317f95 !important; font-size:21px; }.sathi-header .name > span { background:#4c9bb5 !important; color:#fff; }
+.help-btn { padding:10px 15px; border-radius:20px; background:#fff; color:#2a7387; font-size:13px; font-weight:700; text-decoration:none; box-shadow:0 5px 12px rgba(45,117,136,.10); }.help-btn.escalated { background:#f4c95d; color:#3a2a10; }
+
+.chat-body { flex:1; display:flex; flex-direction:column; gap:16px; overflow-y:auto; padding:26px; }.msg { display:flex; align-items:flex-start; gap:10px; margin:0; max-width:76%; }.msg .avatar { width:30px; height:30px; flex-shrink:0; border-radius:50%; background:#6ec5da; }.msg .bubble { max-width:none; padding:13px 16px; border-radius:7px 19px 19px; background:#fff; color:#244c57; font-size:14px; line-height:1.5; box-shadow:0 5px 12px rgba(45,117,136,.08); }.msg.user { align-self:flex-end; justify-content:flex-end; max-width:70%; }.msg.user .bubble { border-radius:19px 7px 19px 19px; background:#bfe3f2; color:#173d47; }
+
+.chat-input-row { display:flex; align-items:center; gap:10px; margin:0; padding:16px 26px 24px; border-radius:0; background:#d2eff7; border-top:1px solid #b8e1ec; }.chat-input-row input { flex:1; min-width:0; padding:14px 17px; border:0; outline:0; border-radius:20px; background:#fff; color:#173d47; font-size:14px; }.chat-input-row input::placeholder { color:#7d9aa3; }.send-btn { width:50px; height:50px; border:0; border-radius:17px; background:#4c9bb5; color:#fff; font-size:21px; cursor:pointer; box-shadow:0 6px 13px rgba(45,117,136,.18); }
+
+.escalation-box { margin:2px 0; padding:16px 18px; border-radius:18px; background:#fff2c9; color:#5a4512; }.escalation-box p { margin:0; color:#5a4512; font-size:13px; line-height:1.5; }.escalation-box .title { margin-bottom:5px; font-weight:800; }.chat-body .btn-primary { display:block; margin-bottom:8px; padding:13px 16px; border-radius:16px; text-align:center; text-decoration:none; }
+
+@media (max-width:600px) { .sathi-header { padding:15px 16px; }.sathi-header .name { font-size:18px; }.help-btn { padding:9px 11px; font-size:11px; }.chat-body { padding:20px 16px; }.chat-input-row { padding:13px 16px 18px; }.msg { max-width:86%; }.msg.user { max-width:80%; } }
+
+/* Keep header and input fixed; only messages scroll */
+.sathi-shell {
+    height: 100dvh;
+    min-height: 0;
+    overflow: hidden;
+}
+
+.chat-body {
+    min-height: 0;
+    overflow-y: auto;
+}
+
+.mic-btn {
+    width: 50px;
+    height: 50px;
+    flex-shrink: 0;
+    border: 0;
+    border-radius: 17px;
+    background: #ffffff;
+    color: #317f95;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.mic-btn.recording {
+    background: #ef6b6b;
+    color: #ffffff;
+    animation: mic-pulse 1s infinite;
+}
+
+@keyframes mic-pulse {
+    50% {
+        transform: scale(1.08);
+    }
+}
