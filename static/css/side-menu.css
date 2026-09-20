@@ -1,0 +1,126 @@
+/* ===========================
+   Side Menu Drawer
+   =========================== */
+.side-menu-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    z-index: 10000;
+}
+
+.side-menu-overlay.open {
+    display: block;
+}
+
+.side-menu-panel {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 78%;
+    max-width: 300px;
+    background: #fff;
+    box-shadow: 8px 0 30px rgba(0, 0, 0, 0.2);
+    transform: translateX(-100%);
+    transition: transform .22s ease;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Poppins', sans-serif;
+}
+
+.side-menu-overlay.open .side-menu-panel {
+    transform: translateX(0);
+}
+
+.side-menu-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 22px 20px;
+    background: linear-gradient(135deg, #2f6d1f, #559b39);
+    color: #fff;
+}
+
+.side-menu-header .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.side-menu-close-btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: 0;
+    color: #fff;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.side-menu-links {
+    flex: 1;
+    padding: 14px 10px;
+    overflow-y: auto;
+}
+
+.side-menu-links a {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 13px 14px;
+    margin-bottom: 4px;
+    border-radius: 14px;
+    color: #23451d;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    transition: background .15s ease;
+}
+
+.side-menu-links a i {
+    width: 20px;
+    text-align: center;
+    font-size: 17px;
+    color: #2f6d1f;
+}
+
+.side-menu-links a:hover,
+.side-menu-links a.active {
+    background: #eef6e6;
+}
+
+.side-menu-links a.active {
+    color: #2f6d1f;
+    font-weight: 700;
+}
+
+.side-menu-footer {
+    padding: 12px 10px 20px;
+    border-top: 1px solid #f0f0f0;
+}
+
+.side-menu-footer a {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 13px 14px;
+    border-radius: 14px;
+    color: #c0392b;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.side-menu-footer a:hover {
+    background: #fdecea;
+}
+
+.side-menu-footer a i {
+    width: 20px;
+    text-align: center;
+    font-size: 17px;
+}

@@ -12,17 +12,19 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/notifications.css') }}">
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/side-menu.css') }}">
 
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <script src="{{ url_for('static', filename='js/notifications.js') }}"></script>
+<script src="{{ url_for('static', filename='js/side-menu.js') }}"></script>
 <body>
 
 <div class="phone-container">
 
     <header class="top-bar">
-        <button class="icon-btn" type="button">
+        <button class="icon-btn js-menu-btn" type="button">
             <i class="fa-solid fa-bars"></i>
         </button>
 

@@ -15,6 +15,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     
     <link rel="stylesheet" href="{{ url_for('static', filename='css/notifications.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/side-menu.css') }}">
 
     <link rel="preconnect" href="https://fonts.gstatic.com"crossorigin>
 
@@ -25,6 +26,7 @@
 </head>
 
 <script src="{{ url_for('static', filename='js/notifications.js') }}"></script>
+<script src="{{ url_for('static', filename='js/side-menu.js') }}"></script>
 <body>
 
 <div class="phone-container profile-page">
@@ -34,9 +36,9 @@
 
     <header class="top-bar">
 
-        <button class="icon-btn">
-            <i class="fa-solid fa-bars"></i>
-        </button>
+       <button class="icon-btn js-menu-btn" type="button">
+        <i class="fa-solid fa-bars"></i>
+    </button>
 
         <button class="icon-btn js-notif-bell" type="button">
             <i class="fa-solid fa-bell"></i>
@@ -332,8 +334,8 @@
 
         <!-- SETTINGS -->
 
-        <a href="#"
-           class="account-row">
+        <a href="{{ url_for('settings') }}"
+        class="account-row">
 
             <div class="account-icon">
                 <i class="fa-solid fa-gear"></i>

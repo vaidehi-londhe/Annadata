@@ -278,6 +278,13 @@ def api_notification_schemes():
         'overview': s['overview']
     } for s in latest])
     
+    
+@app.route('/settings')
+@login_required
+def settings():
+    return render_template('settings.html')
+
+
 @app.route('/saved-schemes')
 @login_required
 def saved_schemes():
