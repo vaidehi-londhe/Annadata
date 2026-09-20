@@ -13,7 +13,7 @@ client = OpenAI(
 )
 
 app = Flask(__name__)
-app.secret_key = "annadata-dev-secret-change-in-production"
+app.secret_key = os.environ.get("SECRET_KEY", "dev-only-secret")
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=30)
 
 
