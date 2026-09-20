@@ -67,31 +67,6 @@
 .settings-switch input:checked + .settings-slider:before { transform:translateX(20px); }
 </style>
 
-<script>
-const settingsOverlay = document.getElementById('settings-overlay');
-const notifToggle = document.getElementById('notif-toggle');
-const langSelect = document.getElementById('lang-select');
-
-notifToggle.checked = localStorage.getItem('notif_pref') !== 'off';
-langSelect.value = localStorage.getItem('app_lang') || 'en';
-
-document.getElementById('settings-open-btn').addEventListener('click', function () {
-    settingsOverlay.style.display = 'flex';
-});
-document.getElementById('settings-close-btn').addEventListener('click', function () {
-    settingsOverlay.style.display = 'none';
-});
-settingsOverlay.addEventListener('click', function (e) {
-    if (e.target === settingsOverlay) settingsOverlay.style.display = 'none';
-});
-
-notifToggle.addEventListener('change', function () {
-    localStorage.setItem('notif_pref', this.checked ? 'on' : 'off');
-});
-langSelect.addEventListener('change', function () {
-    localStorage.setItem('app_lang', this.value);
-});
-</script>
 
 <body>
 
@@ -363,13 +338,11 @@ langSelect.addEventListener('change', function () {
     </section>
 
     <div class="account-card">
-        <div class="account-item"
-        onclick="window.location.href='{{ url_for('saved_schemes') }}'">
 
 
         <!-- SAVED SCHEMES -->
 
-        <a href="#" class="account-row">
+        <a href="{{ url_for('saved_schemes') }}" class="account-row">
 
             <div class="account-icon">  
                 <i class="fa-solid fa-file-lines"></i>
@@ -477,10 +450,35 @@ langSelect.addEventListener('change', function () {
         </a>
 
     </nav>
-
-
 </div>
+
+<script>
+const settingsOverlay = document.getElementById('settings-overlay');
+const notifToggle = document.getElementById('notif-toggle');
+const langSelect = document.getElementById('lang-select');
+
+notifToggle.checked = localStorage.getItem('notif_pref') !== 'off';
+langSelect.value = localStorage.getItem('app_lang') || 'en';
+
+document.getElementById('settings-open-btn').addEventListener('click', function () {
+    settingsOverlay.style.display = 'flex';
+});
+document.getElementById('settings-close-btn').addEventListener('click', function () {
+    settingsOverlay.style.display = 'none';
+});
+settingsOverlay.addEventListener('click', function (e) {
+    if (e.target === settingsOverlay) settingsOverlay.style.display = 'none';
+});
+
+notifToggle.addEventListener('change', function () {
+    localStorage.setItem('notif_pref', this.checked ? 'on' : 'off');
+});
+langSelect.addEventListener('change', function () {
+    localStorage.setItem('app_lang', this.value);
+});
+</script>
 
 </body>
 
 </html>
+
