@@ -621,7 +621,7 @@ def api_market_price():
 
         resp = requests.get(
             "https://api.data.gov.in/resource/9ef84268-d588-465a-a308-a864a43d0070",
-            params=params, timeout=5
+            params=params, timeout=15
         ).json()
 
         records = resp.get("records", [])
