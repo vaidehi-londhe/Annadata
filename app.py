@@ -1,6 +1,7 @@
 import sqlite3
 import random
 import psycopg2
+import requests
 from psycopg2.extras import RealDictCursor
 import os
 from datetime import timedelta, date
@@ -504,6 +505,78 @@ def logout():
     return redirect(url_for('splash'))
 
 
+def weather_code_to_text(code):
+    mapping = {
+        0: "Clear Sky", 1: "Mainly Clear", 2: "Partly Cloudy", 3: "Overcast",
+        45: "Fog", 48: "Fog",
+        51: "Light Drizzle", 53: "Drizzle", 55: "Heavy Drizzle",
+        61: "Light Rain", 63: "Rain", 65: "Heavy Rain",
+        71: "Light Snow", 80: "Rain Showers", 81: "Rain Showers",
+        95: "Thunderstorm"
+    }
+    return mapping.get(code, "Variable")
+
+
+@app.route('/api/weather')
+@login_required
+def api_weather():
+    db = get_db()
+    profile = db.execute(
+        "SELECT state, district FROM farmer_profile WHERE user_id=?",
+        (session['user_id'],)
+    ).fetchone()
+
+    location = (profile['district'] if profile and profile['district'] else None) \
+        or (profile['state'] if profile and profile['state'] else None) \
+        or "Mumbai"
+
+    try:
+        geo = requests.get(
+            "https://geocoding-api.open-meteo.com/v1/search",
+            params={"name": location, "count": 1, "country": "IN"},
+            timeout=5
+        ).json()
+
+        if not geo.get("results"):
+            return jsonify({"error": "Location not found"}), 404
+
+        lat = geo["results"][0]["latitude"]
+        lon = geo["results"][0]["longitude"]
+        place_name = geo["results"][0]["name"]
+
+        weather = requests.get(
+            "https://api.open-meteo.com/v1/forecast",
+            params={
+                "latitude": lat,
+                "longitude": lon,
+                "current": "temperature_2m,weather_code",
+                "daily": "precipitation_probability_max,temperature_2m_max",
+                "timezone": "auto",
+                "forecast_days": 2
+            },
+            timeout=5
+        ).json()
+
+        current_temp = weather["current"]["temperature_2m"]
+        current_code = weather["current"]["weather_code"]
+        rain_chance_tomorrow = weather["daily"]["precipitation_probability_max"][1]
+        max_temp_today = weather["daily"]["temperature_2m_max"][0]
+
+        alert = None
+        if rain_chance_tomorrow >= 60:
+            alert = f"Rain likely tomorrow ({rain_chance_tomorrow}% chance) — avoid spraying pesticides today."
+        elif max_temp_today >= 40:
+            alert = "Extreme heat expected today — ensure adequate irrigation for your crops."
+
+        return jsonify({
+            "location": place_name,
+            "temp": round(current_temp),
+            "condition": weather_code_to_text(current_code),
+            "alert": alert
+        })
+    except Exception:
+        return jsonify({"error": "Could not fetch weather"}), 500
+
 # ---------------------------------------------------------
 # Profile setup + dashboard
 # ---------------------------------------------------------
@@ -857,7 +930,7 @@ def sathi_reply(message, flagged):
                     "role": "system",
                     "content": (
                         "You are Sathi, a friendly AI farming companion for Indian farmers. "
-                        "Reply only in clear, simple English. "
+                        "Reply in the same language style the farmer used — if they write in English, reply in simple English; if they write in Hindi or Hinglish (Roman script), reply in simple Hinglish the same way. "
                         "Keep every answer very short: maximum 2 sentences and 35 words. "
                         "Do not give long introductions, markdown, headings, or bullet points. "
                         "Give only practical help about crops, soil, irrigation, pests, "
