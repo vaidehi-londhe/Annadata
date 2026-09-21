@@ -543,16 +543,16 @@ def api_weather():
         lat = geo["results"][0]["latitude"]
         lon = geo["results"][0]["longitude"]
         place_name = geo["results"][0]["name"]
-
+        
         weather = requests.get(
             "https://api.open-meteo.com/v1/forecast",
             params={
                 "latitude": lat,
                 "longitude": lon,
                 "current": "temperature_2m,weather_code",
-                "daily": "precipitation_probability_max,temperature_2m_max",
+                "daily": "precipitation_probability_max,temperature_2m_max,weather_code",
                 "timezone": "auto",
-                "forecast_days": 2
+                "forecast_days": 5
             },
             timeout=5
         ).json()
@@ -567,12 +567,27 @@ def api_weather():
             alert = f"Rain likely tomorrow ({rain_chance_tomorrow}% chance) — avoid spraying pesticides today."
         elif max_temp_today >= 40:
             alert = "Extreme heat expected today — ensure adequate irrigation for your crops."
+            
+        import datetime as dt
+        forecast = []
+        daily_dates = weather["daily"]["time"]
+        daily_temps = weather["daily"]["temperature_2m_max"]
+        daily_codes = weather["daily"]["weather_code"]
 
+        for i in range(1, 5):
+            day_name = dt.datetime.strptime(daily_dates[i], "%Y-%m-%d").strftime("%a")
+            forecast.append({
+                "day": day_name,
+                "temp": round(daily_temps[i]),
+                "condition": weather_code_to_text(daily_codes[i])
+            })
+            
         return jsonify({
             "location": place_name,
             "temp": round(current_temp),
             "condition": weather_code_to_text(current_code),
-            "alert": alert
+            "alert": alert,
+            "forecast": forecast
         })
     except Exception:
         return jsonify({"error": "Could not fetch weather"}), 500

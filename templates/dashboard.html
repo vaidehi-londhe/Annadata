@@ -19,28 +19,7 @@
 </head>
 <script src="{{ url_for('static', filename='js/notifications.js') }}"></script>
 <script src="{{ url_for('static', filename='js/side-menu.js') }}"></script>
-<script src="{{ url_for('static', filename='js/notifications.js') }}"></script>
-<script>
-fetch('/api/weather')
-    .then(r => r.json())
-    .then(data => {
-        if (data.error) return;
 
-        document.getElementById('weather-temp').textContent = data.temp + '°C';
-        document.getElementById('weather-condition').textContent = data.condition;
-
-        const icons = { "Clear Sky":"☀️","Mainly Clear":"🌤️","Partly Cloudy":"⛅","Overcast":"☁️",
-                         "Fog":"🌫️","Light Rain":"🌦️","Rain":"🌧️","Heavy Rain":"🌧️","Thunderstorm":"⛈️" };
-        document.getElementById('weather-icon').textContent = icons[data.condition] || '☀️';
-
-        if (data.alert) {
-            const banner = document.getElementById('weather-alert-banner');
-            banner.textContent = '⚠️ ' + data.alert;
-            banner.style.display = 'block';
-        }
-    })
-    .catch(() => {});
-</script>
 
 <body>
 
@@ -214,33 +193,7 @@ fetch('/api/weather')
         <h2>4-Day Forecast</h2>
     </section>
 
-    <div class="forecast-row">
-
-        <div class="forecast-card">
-            <strong>Mon</strong>
-            <i class="fa-solid fa-sun"></i>
-            <span>30°C</span>
-        </div>
-
-        <div class="forecast-card">
-            <strong>Tue</strong>
-            <i class="fa-solid fa-cloud-sun"></i>
-            <span>29°C</span>
-        </div>
-
-        <div class="forecast-card">
-            <strong>Wed</strong>
-            <i class="fa-solid fa-cloud-rain"></i>
-            <span>26°C</span>
-        </div>
-
-        <div class="forecast-card">
-            <strong>Thu</strong>
-            <i class="fa-solid fa-cloud"></i>
-            <span>27°C</span>
-        </div>
-
-    </div>
+        <div class="forecast-row" id="forecast-row"></div>
 
     <section class="tip-card">
         <div class="tip-icon">💡</div>
@@ -281,6 +234,42 @@ fetch('/api/weather')
     </nav>
 
 </div>
+
+<script>
+fetch('/api/weather')
+    .then(r => r.json())
+    .then(data => {
+        if (data.error) return;
+
+        document.getElementById('weather-temp').textContent = data.temp + '°C';
+        document.getElementById('weather-condition').textContent = data.condition;
+
+        const icons = { "Clear Sky":"☀️","Mainly Clear":"🌤️","Partly Cloudy":"⛅","Overcast":"☁️",
+                         "Fog":"🌫️","Light Rain":"🌦️","Rain":"🌧️","Heavy Rain":"🌧️","Thunderstorm":"⛈️" };
+        document.getElementById('weather-icon').textContent = icons[data.condition] || '☀️';
+
+        if (data.alert) {
+            const banner = document.getElementById('weather-alert-banner');
+            banner.textContent = '⚠️ ' + data.alert;
+            banner.style.display = 'block';
+        }
+
+        if (data.forecast) {
+            const dayIcons = { "Clear Sky":"fa-sun","Mainly Clear":"fa-cloud-sun","Partly Cloudy":"fa-cloud-sun",
+                             "Overcast":"fa-cloud","Fog":"fa-smog","Light Rain":"fa-cloud-rain","Rain":"fa-cloud-rain",
+                             "Heavy Rain":"fa-cloud-showers-heavy","Thunderstorm":"fa-bolt" };
+            const row = document.getElementById('forecast-row');
+            row.innerHTML = data.forecast.map(d => `
+                <div class="forecast-card">
+                    <strong>${d.day}</strong>
+                    <i class="fa-solid ${dayIcons[d.condition] || 'fa-cloud'}"></i>
+                    <span>${d.temp}°C</span>
+                </div>
+            `).join('');
+        }
+    })
+    .catch(() => {});
+</script>
 
 </body>
 </html>
