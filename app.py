@@ -591,6 +591,54 @@ def api_weather():
         })
     except Exception:
         return jsonify({"error": "Could not fetch weather"}), 500
+    
+
+@app.route('/api/market-price')
+@login_required
+def api_market_price():
+    db = get_db()
+    profile = db.execute(
+        "SELECT state, currently_growing FROM farmer_profile WHERE user_id=?",
+        (session['user_id'],)
+    ).fetchone()
+
+    crop = (profile['currently_growing'].split(',')[0].strip()
+            if profile and profile['currently_growing'] else None)
+    state = profile['state'] if profile and profile['state'] else None
+
+    if not crop:
+        return jsonify({"error": "No crop set"}), 404
+
+    try:
+        params = {
+            "api-key": os.environ["DATA_GOV_API_KEY"],
+            "format": "json",
+            "limit": 1,
+            "filters[commodity]": crop
+        }
+        if state:
+            params["filters[state]"] = state
+
+        resp = requests.get(
+            "https://api.data.gov.in/resource/9ef84268-d588-465a-a308-a864a43d0070",
+            params=params, timeout=5
+        ).json()
+
+        records = resp.get("records", [])
+        if not records:
+            return jsonify({"error": "No data found"}), 404
+
+        r = records[0]
+        return jsonify({
+            "commodity": r.get("commodity"),
+            "market": r.get("market"),
+            "state": r.get("state"),
+            "price": r.get("modal_price"),
+            "date": r.get("arrival_date")
+        })
+    except Exception:
+        return jsonify({"error": "Could not fetch price"}), 500
+    
 
 # ---------------------------------------------------------
 # Profile setup + dashboard

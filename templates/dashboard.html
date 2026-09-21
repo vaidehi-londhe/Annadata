@@ -137,6 +137,14 @@
 
     </div>
 
+        <div id="market-price-card" class="tip-card" style="display:none;">
+        <div class="tip-icon">💰</div>
+        <div>
+            <h3>Today's Mandi Price</h3>
+            <p id="market-price-text"></p>
+        </div>
+    </div>
+
     <section class="section-title">
         <h2>Your Farm</h2>
         <a href="{{ url_for('profile') }}">View Details</a>
@@ -269,6 +277,18 @@ fetch('/api/weather')
         }
     })
     .catch(() => {});
+
+    
+fetch('/api/market-price')
+    .then(r => r.json())
+    .then(data => {
+        if (data.error) return;
+        document.getElementById('market-price-text').textContent =
+            `${data.commodity} — ₹${data.price}/quintal at ${data.market}, ${data.state} (${data.date})`;
+        document.getElementById('market-price-card').style.display = 'flex';
+    })
+    .catch(() => {});
+
 </script>
 
 </body>
