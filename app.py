@@ -636,7 +636,8 @@ def api_market_price():
             "price": r.get("modal_price"),
             "date": r.get("arrival_date")
         })
-    except Exception:
+    except Exception as e:
+        print("Market price error:", e)
         return jsonify({"error": "Could not fetch price"}), 500
     
 
