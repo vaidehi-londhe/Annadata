@@ -176,6 +176,114 @@ TIPS = [
     "Store your seeds in a cool, dry place to protect them before the next sowing season.",
 ]
 
+
+LEARN_RESOURCES = {
+    "Modern Techniques": {
+        "icon": "🌱",
+        "items": [
+            {
+                "title": "Precision Farming Basics",
+                "description": "How sensors, drones and data help farmers use less water, fertilizer and pesticide while growing more.",
+                "link": "https://icar.org.in/",
+                "source": "ICAR"
+            },
+            {
+                "title": "Crop Rotation for Better Yield",
+                "description": "Why growing different crops in sequence keeps soil healthy and breaks pest and disease cycles.",
+                "link": "https://farmer.gov.in/",
+                "source": "Farmer Portal, Govt of India"
+            },
+            {
+                "title": "Zero Budget Natural Farming (ZBNF)",
+                "description": "A low-cost farming method that reduces dependency on chemical fertilizers using natural inputs.",
+                "link": "https://pgsindia-ncof.gov.in/",
+                "source": "NCOF, Govt of India"
+            },
+        ]
+    },
+    "Water Management": {
+        "icon": "💧",
+        "items": [
+            {
+                "title": "Drip Irrigation Setup Guide",
+                "description": "Step-by-step basics of setting up drip irrigation to cut water usage by up to 40%.",
+                "link": "https://pmksy.gov.in/",
+                "source": "PM Krishi Sinchayee Yojana"
+            },
+            {
+                "title": "Rainwater Harvesting for Farms",
+                "description": "Simple techniques to collect and store rainwater for use during dry spells.",
+                "link": "https://jalshakti-dowr.gov.in/",
+                "source": "Ministry of Jal Shakti"
+            },
+            {
+                "title": "Mulching to Retain Soil Moisture",
+                "description": "How covering soil with straw or plastic mulch reduces water evaporation and weed growth.",
+                "link": "https://agricoop.nic.in/",
+                "source": "Dept. of Agriculture & Farmers Welfare"
+            },
+        ]
+    },
+    "Organic Farming": {
+        "icon": "🌿",
+        "items": [
+            {
+                "title": "Making Your Own Compost",
+                "description": "Turn kitchen and farm waste into nutrient-rich compost to reduce chemical fertilizer costs.",
+                "link": "https://pgsindia-ncof.gov.in/",
+                "source": "NCOF, Govt of India"
+            },
+            {
+                "title": "Natural Pest Control Methods",
+                "description": "Using neem, cow urine and companion planting to keep pests away without chemicals.",
+                "link": "https://icar.org.in/",
+                "source": "ICAR"
+            },
+            {
+                "title": "Getting Organic Certification",
+                "description": "What documents and steps are needed to certify your farm as organic in India.",
+                "link": "https://apeda.gov.in/apedawebsite/index.html",
+                "source": "APEDA"
+            },
+        ]
+    },
+    "Pest & Disease Control": {
+        "icon": "🐛",
+        "items": [
+            {
+                "title": "Identifying Common Crop Pests",
+                "description": "A visual guide to spotting early signs of pest damage on leaves, stems and fruit.",
+                "link": "https://farmer.gov.in/",
+                "source": "Farmer Portal, Govt of India"
+            },
+            {
+                "title": "Integrated Pest Management (IPM)",
+                "description": "Combining biological, cultural and minimal chemical methods to control pests sustainably.",
+                "link": "https://ppqs.gov.in/",
+                "source": "Directorate of Plant Protection"
+            },
+        ]
+    },
+    "Government Schemes Explained": {
+        "icon": "🏛️",
+        "items": [
+            {
+                "title": "How to Apply for PM-KISAN",
+                "description": "A simple walkthrough of registering for the PM-KISAN income support scheme.",
+                "link": "https://pmkisan.gov.in/",
+                "source": "PM-KISAN"
+            },
+            {
+                "title": "Understanding Crop Insurance (PMFBY)",
+                "description": "What crop insurance covers, how premiums work, and how to file a claim after crop loss.",
+                "link": "https://pmfby.gov.in/",
+                "source": "PMFBY"
+            },
+        ]
+    },
+}
+
+
 DISTRESS_KEYWORDS = [
     "no way out", "can't go on", "end it", "give up", "no hope",
     "worthless", "burden", "hopeless", "can't take it", "suicide", "kill myself","mujhe nahi jeena", "mujhe nhi jeena", "jeena nahi hai",
@@ -592,62 +700,13 @@ def api_weather():
     except Exception:
         return jsonify({"error": "Could not fetch weather"}), 500
     
-
-@app.route('/api/market-price')
+@app.route('/learn')
 @login_required
-def api_market_price():
-    db = get_db()
-    profile = db.execute(
-        "SELECT state, currently_growing FROM farmer_profile WHERE user_id=?",
-        (session['user_id'],)
-    ).fetchone()
-
-    crop = (profile['currently_growing'].split(',')[0].strip()
-            if profile and profile['currently_growing'] else None)
-    state = profile['state'] if profile and profile['state'] else None
-
-    if not crop:
-        return jsonify({"error": "No crop set"}), 404
-
-        fallback = {
-        "commodity": crop,
-        "market": "Local Mandi",
-        "state": state or "Maharashtra",
-        "price": "2200",
-        "date": date.today().strftime("%d-%m-%Y")
-    }
-
-    try:
-        params = {
-            "api-key": os.environ["DATA_GOV_API_KEY"],
-            "format": "json",
-            "limit": 1,
-            "filters[commodity]": crop
-        }
-        if state:
-            params["filters[state]"] = state
-
-        resp = requests.get(
-            "https://api.data.gov.in/resource/9ef84268-d588-465a-a308-a864a43d0070",
-            params=params, timeout=8
-        ).json()
-
-        records = resp.get("records", [])
-        if not records:
-            return jsonify(fallback)
-
-        r = records[0]
-        return jsonify({
-            "commodity": r.get("commodity"),
-            "market": r.get("market"),
-            "state": r.get("state"),
-            "price": r.get("modal_price"),
-            "date": r.get("arrival_date")
-        })
-    except Exception as e:
-        print("Market price error (using fallback):", e)
-        return jsonify(fallback)
+def learn():
+    return render_template('learn.html', categories=LEARN_RESOURCES)
     
+
+
 
 # ---------------------------------------------------------
 # Profile setup + dashboard
