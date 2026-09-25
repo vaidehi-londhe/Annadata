@@ -33,7 +33,7 @@
     <section class="schemes-list">
         <h2>{{ data.icon }} {{ category }}</h2>
 
-        {% for item in data.items %}
+        {% for item in data['items'] %}
         <a href="{{ item.link }}" target="_blank" rel="noopener" class="scheme-card">
 
             <div class="scheme-card-left">
