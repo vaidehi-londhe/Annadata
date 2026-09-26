@@ -14,12 +14,11 @@ body{
     justify-content:center;
     align-items:flex-start;
 
-    background:linear-gradient(
+        background:linear-gradient(
         180deg,
-        #f7ffb5 0%,
-        hsl(68, 93%, 78%) 35%,
-        #edf98d 70%,
-        #f6ffb7 100%
+        #f7ffb6 0%,
+        #f4ffa2 45%,
+        #efff95 100%
     );
 
     overflow-x:hidden;

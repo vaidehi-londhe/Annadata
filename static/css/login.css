@@ -15,11 +15,11 @@ body{
     justify-content:center;
     align-items:flex-start;
 
-    background:linear-gradient(
+        background:linear-gradient(
         180deg,
-        #f8ffb4 0%,
-        #eefb94 40%,
-        #ecfa8d 100%
+        #f7ffb6 0%,
+        #f4ffa2 45%,
+        #efff95 100%
     );
 
     overflow-x:hidden;
