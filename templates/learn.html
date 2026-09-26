@@ -9,11 +9,11 @@
 <div class="schemes-page">
 
     <div class="top-actions">
-        <button class="menu-btn js-menu-btn" type="button">
-            ☰
-        </button>
+        <a href="{{ url_for('dashboard') }}" class="menu-btn" style="text-decoration:none; display:flex; align-items:center; justify-content:center; width:48px; height:48px; font-size:18px;">
+            <i class="fa-solid fa-arrow-left"></i>
+        </a>
 
-        <button class="notification-btn js-notif-bell" type="button">
+        <button class="notification-btn js-notif-bell" type="button" style="width:48px; height:48px; font-size:18px;">
             <i class="fa-solid fa-bell"></i>
         </button>
     </div>
@@ -55,7 +55,6 @@
         {% endfor %}
     </section>
     {% endfor %}
-
 </div>
 
 {% endblock %}
@@ -83,7 +82,7 @@
         <span>Sathi</span>
     </a>
 
-    <a href="{{ url_for('profile') }}" class="active">
+    <a href="{{ url_for('profile') }}">
         <i class="fa-solid fa-user"></i>
         <span>Profile</span>
     </a>
