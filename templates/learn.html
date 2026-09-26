@@ -60,30 +60,30 @@
 
 <nav class="bottom-nav">
 
-    <a href="{{ url_for('dashboard') }}">
-        <i class="fa-solid fa-house"></i>
-        <span>Home</span>
-    </a>
+        <a href="{{ url_for('dashboard') }}" class="active">
+            <i class="fa-solid fa-house"></i>
+            <span>Home</span>
+        </a>
 
-    <a href="{{ url_for('crop_advisory') }}">
-        <i class="fa-solid fa-seedling"></i>
-        <span>Crop</span>
-    </a>
+        <a href="{{ url_for('crop_advisory') }}">
+            <i class="fa-solid fa-seedling"></i>
+            <span>Crop</span>
+        </a>
 
-    <a href="{{ url_for('schemes') }}">
-        <i class="fa-solid fa-file-lines"></i>
-        <span>Schemes</span>
-    </a>
+        <a href="{{ url_for('schemes') }}">
+            <i class="fa-solid fa-file-lines"></i>
+            <span>Schemes</span>
+        </a>
 
-    <a href="{{ url_for('sathi') }}">
-        <i class="fa-solid fa-robot"></i>
-        <span>Sathi</span>
-    </a>
+        <a href="{{ url_for('sathi') }}">
+            <i class="fa-solid fa-robot"></i>
+            <span>Sathi</span>
+        </a>
 
-    <a href="{{ url_for('profile') }}">
-        <i class="fa-solid fa-user"></i>
-        <span>Profile</span>
-    </a>
+        <a href="{{ url_for('profile') }}">
+            <i class="fa-solid fa-user"></i>
+            <span>Profile</span>
+        </a>
 
-</nav>
+    </nav>
 {% endblock %}

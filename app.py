@@ -184,20 +184,20 @@ LEARN_RESOURCES = {
             {
                 "title": "Precision Farming Basics",
                 "description": "How sensors, drones and data help farmers use less water, fertilizer and pesticide while growing more.",
-                "link": "https://icar.org.in/",
-                "source": "ICAR"
+                "link": "https://en.wikipedia.org/wiki/Precision_agriculture",
+                "source": "Wikipedia"
             },
             {
                 "title": "Crop Rotation for Better Yield",
                 "description": "Why growing different crops in sequence keeps soil healthy and breaks pest and disease cycles.",
-                "link": "https://farmer.gov.in/",
-                "source": "Farmer Portal, Govt of India"
+                "link": "https://en.wikipedia.org/wiki/Crop_rotation",
+                "source": "Wikipedia"
             },
             {
                 "title": "Zero Budget Natural Farming (ZBNF)",
                 "description": "A low-cost farming method that reduces dependency on chemical fertilizers using natural inputs.",
-                "link": "https://pgsindia-ncof.gov.in/",
-                "source": "NCOF, Govt of India"
+                "link": "https://en.wikipedia.org/wiki/Zero_budget_natural_farming",
+                "source": "Wikipedia"
             },
         ]
     },
@@ -207,20 +207,20 @@ LEARN_RESOURCES = {
             {
                 "title": "Drip Irrigation Setup Guide",
                 "description": "Step-by-step basics of setting up drip irrigation to cut water usage by up to 40%.",
-                "link": "https://pmksy.gov.in/",
-                "source": "PM Krishi Sinchayee Yojana"
+                "link": "https://en.wikipedia.org/wiki/Drip_irrigation",
+                "source": "Wikipedia"
             },
             {
                 "title": "Rainwater Harvesting for Farms",
                 "description": "Simple techniques to collect and store rainwater for use during dry spells.",
-                "link": "https://jalshakti-dowr.gov.in/",
-                "source": "Ministry of Jal Shakti"
+                "link": "https://en.wikipedia.org/wiki/Rainwater_harvesting",
+                "source": "Wikipedia"
             },
             {
                 "title": "Mulching to Retain Soil Moisture",
                 "description": "How covering soil with straw or plastic mulch reduces water evaporation and weed growth.",
-                "link": "https://agricoop.nic.in/",
-                "source": "Dept. of Agriculture & Farmers Welfare"
+                "link": "https://en.wikipedia.org/wiki/Mulch",
+                "source": "Wikipedia"
             },
         ]
     },
@@ -230,20 +230,20 @@ LEARN_RESOURCES = {
             {
                 "title": "Making Your Own Compost",
                 "description": "Turn kitchen and farm waste into nutrient-rich compost to reduce chemical fertilizer costs.",
-                "link": "https://pgsindia-ncof.gov.in/",
-                "source": "NCOF, Govt of India"
+                "link": "https://en.wikipedia.org/wiki/Compost",
+                "source": "Wikipedia"
             },
             {
                 "title": "Natural Pest Control Methods",
                 "description": "Using neem, cow urine and companion planting to keep pests away without chemicals.",
-                "link": "https://icar.org.in/",
-                "source": "ICAR"
+                "link": "https://en.wikipedia.org/wiki/Biological_pest_control",
+                "source": "Wikipedia"
             },
             {
-                "title": "Getting Organic Certification",
+                "title": "Organic Farming Certification",
                 "description": "What documents and steps are needed to certify your farm as organic in India.",
-                "link": "https://apeda.gov.in/apedawebsite/index.html",
-                "source": "APEDA"
+                "link": "https://en.wikipedia.org/wiki/Organic_certification",
+                "source": "Wikipedia"
             },
         ]
     },
@@ -253,14 +253,14 @@ LEARN_RESOURCES = {
             {
                 "title": "Identifying Common Crop Pests",
                 "description": "A visual guide to spotting early signs of pest damage on leaves, stems and fruit.",
-                "link": "https://farmer.gov.in/",
-                "source": "Farmer Portal, Govt of India"
+                "link": "https://en.wikipedia.org/wiki/Pest_(organism)",
+                "source": "Wikipedia"
             },
             {
                 "title": "Integrated Pest Management (IPM)",
                 "description": "Combining biological, cultural and minimal chemical methods to control pests sustainably.",
-                "link": "https://ppqs.gov.in/",
-                "source": "Directorate of Plant Protection"
+                "link": "https://en.wikipedia.org/wiki/Integrated_pest_management",
+                "source": "Wikipedia"
             },
         ]
     },

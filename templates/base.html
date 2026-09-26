@@ -45,6 +45,7 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/sathi.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/profile_setup.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/notifications.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/side-menu.css') }}">
   <!-- PWA styles (install banner, toast, offline, app-mode safe-areas) -->
   <link rel="stylesheet" href="{{ url_for('static', filename='css/pwa.css') }}">
 </head>
@@ -120,6 +121,7 @@
   ═══════════════════════════════════════ -->
   <script src="{{ url_for('static', filename='js/pwa.js') }}"></script>
   <script src="{{ url_for('static', filename='js/notifications.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/side-menu.js') }}"></script>
 
   {% block extra_js %}{% endblock %}
 </body>
