@@ -1,12 +1,13 @@
 /* ===========================
    Side menu drawer: Home, Crop,
-   Schemes, Sathi, Profile, Logout
+   Schemes, Learn, Sathi, Profile, Logout
    =========================== */
 (function () {
     const LINKS = [
         { label: 'Home',    icon: 'fa-house',       href: '/dashboard' },
         { label: 'Crop',    icon: 'fa-seedling',    href: '/crop-advisory' },
         { label: 'Schemes', icon: 'fa-file-lines',  href: '/schemes' },
+        { label: 'Learn',   icon: 'fa-book',        href: '/learn' },
         { label: 'Sathi',   icon: 'fa-robot',       href: '/sathi' },
         { label: 'Profile', icon: 'fa-user',        href: '/profile' }
     ];
@@ -23,16 +24,7 @@
                         <span>${l.label}</span>
                     </a>`;
         }).join('');
-    
 
-    const LINKS = [
-        { label: 'Home',    icon: 'fa-house',       href: '/dashboard' },
-        { label: 'Crop',    icon: 'fa-seedling',    href: '/crop-advisory' },
-        { label: 'Schemes', icon: 'fa-file-lines',  href: '/schemes' },
-        { label: 'Learn',   icon: 'fa-book',        href: '/learn' },
-        { label: 'Sathi',   icon: 'fa-robot',       href: '/sathi' },
-        { label: 'Profile', icon: 'fa-user',        href: '/profile' }
-    ];
         const overlay = document.createElement('div');
         overlay.id = 'side-menu-overlay';
         overlay.className = 'side-menu-overlay';
