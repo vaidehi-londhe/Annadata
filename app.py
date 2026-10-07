@@ -1055,7 +1055,7 @@ def sathi_reply(message, flagged):
 
     try:
         response = client.chat.completions.create(
-            model="gemini-3.5-flash",
+            model="gemini-2.5-flash",
             messages=[
                 {
                     "role": "system",
