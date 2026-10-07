@@ -542,11 +542,11 @@ def signup():
 
         password_hash = generate_password_hash(password)
         cur = db.execute(
-            "INSERT INTO users (full_name, phone_number, password_hash) VALUES (?,?,?)",
+            "INSERT INTO users (full_name, phone_number, password_hash) VALUES (?,?,?) RETURNING id",
             (full_name, phone, password_hash)
-        )
+            )
+        user_id = cur.fetchone()['id']
         db.commit()
-        user_id = cur.lastrowid
 
         # Auto-login after signup
         session.permanent = True
