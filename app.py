@@ -10,7 +10,9 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from openai import OpenAI
 client = OpenAI(
     api_key=os.environ["GEMINI_API_KEY"],
-    base_url="https://generativelanguage.googleapis.com/v1beta/openai/"
+    base_url="https://generativelanguage.googleapis.com/v1beta/openai/",
+    timeout=20.0,
+    max_retries=1
 )
 
 app = Flask(__name__)
@@ -1055,7 +1057,7 @@ def sathi_reply(message, flagged):
 
     try:
         response = client.chat.completions.create(
-            model="gemini-3.8-flash",
+            model="gemini-3.1-flash-lite",
             messages=[
                 {
                     "role": "system",
